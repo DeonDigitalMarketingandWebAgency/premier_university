@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Financial Portal | Premier University</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/chart.js@3.7.0/dist/chart.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #002147;
+            --secondary-color: #f8f9fa;
+            --accent-color: #ffd700;
+            --success-color: #28a745;
+            --info-color: #17a2b8;
+            --warning-color: #ffc107;
+            --danger-color: #dc3545;
+        }
+
+        .sidebar {
+            background: var(--primary-color);
+            min-height: 100vh;
+            box-shadow: 3px 0 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-link {
+            color: rgba(255, 255, 255, 0.8) !important;
+            transition: all 0.3s ease;
+            border-radius: 8px;
+            margin: 4px 12px;
+            padding: 12px 20px !important;
+        }
+
+        .nav-link.active {
+            background: linear-gradient(45deg, var(--accent-color), #ffc107);
+            color: var(--primary-color) !important;
+            font-weight: 500;
+            border-left: 0;
+        }
+
+        .nav-link:hover:not(.active) {
+            background: rgba(255, 255, 255, 0.05);
+            transform: translateX(4px);
+        }
+
+        .card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+        }
+
+        .dashboard-header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, var(--primary-color), #003366);
+            color: white;
+            border-radius: 15px;
+            overflow: hidden;
+        }
+
+        .calendar-day {
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border-radius: 8px;
+        }
+
+        .calendar-day:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 280px;
+                transform: translateX(-100%);
+                transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            }
+
+            .sidebar.active {
+                transform: translateX(0);
+            }
+
+            .main-content {
+                margin-left: 0 !important;
+            }
+        }
+
+        /* Grades */
+        .grade-chart-container {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .gpa-calculator {
+            background: linear-gradient(135deg, #002147, #003366);
+            color: white;
+            border-radius: 15px;
+            padding: 2rem;
+        }
+
+        .assignment-detail {
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .assignment-detail:hover {
+            background: #f8f9fa;
+            transform: translateX(5px);
+        }
+
+        /* Payments */
+        .payment-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .invoice-table tr {
+            transition: all 0.3s ease;
+        }
+
+        .invoice-table tr:hover {
+            background: #f8f9fa;
+            transform: translateX(5px);
+        }
+
+        .payment-method-card {
+            border-left: 4px solid #002147;
+        }
+    </style>
+</head>
+
+<body class="bg-light">
+    <!-- Mobile Header -->
+    <nav class="navbar navbar-dark bg-primary d-lg-none">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <img src="../img/logo.png" alt="Logo" height="30" class="me-2">
+                Premier University
+            </a>
+            <button class="navbar-toggler" type="button" id="mobileMenuToggle">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="container-fluid">
+            <div class="row">
+                <!-- Sidebar -->
+                <nav class="col-lg-2 sidebar fixed-top vh-100">
+                    <div class="sidebar-sticky pt-4">
+                        <div class="text-center mb-4">
+                            <img src="../img/logo.png" alt="University Logo" class="img-fluid"
+                                style="max-width: 198px;">
+                        </div>
+                        <ul class="nav flex-column">
+                            <li class="nav-item">
+                                <a class="nav-link" href="dashboard.html">
+                                    <i class="bi bi-speedometer2 me-2"></i> Dashboard
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="my-courses.html">
+                                    <i class="bi bi-journal-bookmark me-2"></i> My Courses
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="grades.html">
+                                    <i class="bi bi-clipboard-data me-2"></i> Grades
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="timetable.html">
+                                    <i class="bi bi-calendar-event me-2"></i> Timetable
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link active" href="payments.html">
+                                    <i class="bi bi-credit-card me-2"></i> Payments
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+
+                <!-- Main Content -->
+                <main class="col-lg-10 ms-sm-auto px-lg-4 main-content">
+                    <!-- Header -->
+                    <div class="dashboard-header d-flex justify-content-between flex-wrap align-items-center pt-4 pb-3 px-4 mt-3"
+                        style="position: relative; margin-top: 1.5rem;">
+                        <h1 class="h3 mb-0">Student Dashboard</h1>
+                        <div class="d-flex align-items-center">
+                            <div class="dropdown" style="position: relative;">
+                                <button class="btn btn-outline-primary rounded-pill" type="button"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="bi bi-person-circle me-2"></i>John Doe
+                                    <i class="bi bi-chevron-down ms-2"></i>
+                                </button>
+                                <ul class="dropdown-menu dropdown-menu-end"
+                                    style="z-index: 1300 !important; position: absolute;">
+                                    <li><a class="dropdown-item" href="profile.html">
+                                            <i class="bi bi-person me-2"></i>Profile</a></li>
+                                    <li><a class="dropdown-item" href="settings.html">
+                                            <i class="bi bi-gear me-2"></i>Settings</a></li>
+                                    <li><a class="dropdown-item d-flex justify-content-between align-items-center"
+                                            href="notifications.html">
+                                            <span><i class="bi bi-bell me-2"></i>Notifications</span>
+                                            <span class="badge bg-danger rounded-pill">2</span>
+                                        </a></li>
+                                    <li><a class="dropdown-item" href="help.html">
+                                            <i class="bi bi-question-circle me-2"></i>Help</a></li>
+                                    <li>
+                                        <hr class="dropdown-divider">
+                                    </li>
+                                    <li><a class="dropdown-item text-danger" href="login.html">
+                                            <i class="bi bi-box-arrow-left me-2"></i>Logout</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Payments Content -->
+                    <div class="container-fluid pt-4">
+                        <div class="row g-4">
+                            <div class="col-xl-8">
+                                <div class="payment-card">
+                                    <h5 class="mb-4">Payment Overview</h5>
+                                    <div class="row mb-4">
+                                        <div class="col-md-6">
+                                            <canvas id="paymentChart"></canvas>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="alert alert-success">
+                                                <h5>Current Balance</h5>
+                                                <h2>$2,500.00</h2>
+                                                <small>Due Date: 2023-12-15</small>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <h5 class="mb-3">Payment History</h5>
+                                    <div class="table-responsive">
+                                        <table class="table invoice-table">
+                                            <thead>
+                                                <tr>
+                                                    <th>Date</th>
+                                                    <th>Description</th>
+                                                    <th>Amount</th>
+                                                    <th>Status</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>2023-09-15</td>
+                                                    <td>Tuition Payment</td>
+                                                    <td>$1,500.00</td>
+                                                    <td><span class="badge bg-success">Completed</span></td>
+                                                </tr>
+                                                <!-- More rows -->
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-xl-4">
+                                <div class="payment-card">
+                                    <h5 class="mb-4">Payment Methods</h5>
+                                    <div class="card payment-method-card mb-3">
+                                        <div class="card-body">
+                                            <div class="d-flex justify-content-between">
+                                                <div>
+                                                    <i class="bi bi-credit-card fs-5 me-3"></i>
+                                                    **** **** **** 1234
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" checked>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="crypto-payment">
+                                        <div class="crypto-options">
+                                            <button class="btn btn-bitcoin"><i
+                                                    class="bi bi-currency-bitcoin"></i></button>
+                                            <button class="btn btn-ethereum"><i
+                                                    class="bi bi-currency-ethereum"></i></button>
+                                        </div>
+                                    </div>
+                                    <button class="btn btn-primary w-100" data-bs-toggle="modal"
+                                        data-bs-target="#addPaymentModal">
+                                        <i class="bi bi-plus-lg me-2"></i>Add New Method
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Payment Timeline -->
+                            <div class="col-md-6">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h5>Payment Timeline</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="payment-timeline">
+                                            <div class="timeline-item success">
+                                                <div class="timeline-marker"></div>
+                                                <div class="timeline-content">
+                                                    <h6>Tuition Deposit</h6>
+                                                    <small class="text-muted">Paid: Jan 15</small>
+                                                    <span class="amount">$500.00</span>
+                                                </div>
+                                            </div>
+                                            <!-- More timeline items -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Financial Aid Section -->
+                            <div class="col-md-6">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h5>Financial Aid</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="financial-aid-status">
+                                            <h6 class="text-success">
+                                                <i class="bi bi-check-circle"></i> Scholarship Approved
+                                            </h6>
+                                            <div class="award-details">
+                                                <div class="award-amount">
+                                                    $5,000 Academic Excellence Award
+                                                </div>
+                                                <small class="text-muted">Disbursed: March 1, 2024</small>
+                                            </div>
+                                        </div>
+
+                                        <!-- Tax Documents -->
+                                        <div class="tax-documents mt-4">
+                                            <h6><i class="bi bi-file-earmark-text"></i> Tax Documents</h6>
+                                            <div class="document-list">
+                                                <a href="#" class="document-item">
+                                                    2023 Tuition Statement (1098-T)
+                                                    <i class="bi bi-download"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Payment Plan Customization -->
+                            <div class="col-12">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h5>Payment Plan Options</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="payment-plan-options">
+                                            <div class="plan-card">
+                                                <h6>Standard Plan</h6>
+                                                <div class="payment-schedule">
+                                                    <div class="schedule-item">
+                                                        <span>Mar 15</span>
+                                                        <span>$1,000.00</span>
+                                                    </div>
+                                                    <!-- More schedule items -->
+                                                </div>
+                                                <button class="btn btn-outline-primary w-100">
+                                                    Select Plan
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="ai-financial-advisor">
+                                <div class="recommendation">
+                                    "Consider work-study program to offset 30% of tuition"
+                                </div>
+                            </div>
+
+                            <div class="blockchain-verification">
+                                <i class="bi bi-shield-check"></i>
+                                <span>Payment Hash: 0x32fd...c3a4</span>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+            </div>
+        </div>
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+        <script>
+            // Mobile Menu Toggle
+            document.getElementById('mobileMenuToggle').addEventListener('click', () => {
+                document.querySelector('.sidebar').classList.toggle('active');
+            });
+
+            // Close mobile menu when clicking outside
+            document.addEventListener('click', (e) => {
+                const sidebar = document.querySelector('.sidebar');
+                if (window.innerWidth < 992 && !e.target.closest('.sidebar') && !e.target.closest('#mobileMenuToggle')) {
+                    sidebar.classList.remove('active');
+                }
+            });
+
+            // Initialize calendar
+            function initializeCalendar() {
+                // Calendar implementation using a library like FullCalendar
+            }
+            initializeCalendar();
+
+            // Initialize Grade Chart
+            new Chart(document.getElementById('gradeChart'), {
+                type: 'bar',
+                data: {
+                    labels: ['A', 'A-', 'B+', 'B', 'B-'],
+                    datasets: [{
+                        label: 'Grade Distribution',
+                        data: [12, 8, 5, 3, 2],
+                        backgroundColor: '#002147'
+                    }]
+                }
+            });
+
+            // Payment Chart
+            new Chart(document.getElementById('paymentChart'), {
+                type: 'doughnut',
+                data: {
+                    labels: ['Tuition', 'Housing', 'Fees'],
+                    datasets: [{
+                        data: [1500, 750, 250],
+                        backgroundColor: ['#002147', '#ffd700', '#28a745']
+                    }]
+                }
+            });
+
+            // Add hover tooltips
+            const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+            const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+
+            // Dynamic content loading
+            document.querySelectorAll('.async-load').forEach(element => {
+                element.addEventListener('click', async (e) => {
+                    const content = await fetchContent(e.target.dataset.src);
+                    element.parentElement.innerHTML = content;
+                });
+            });
+        </script>
+</body>
+
+</html>

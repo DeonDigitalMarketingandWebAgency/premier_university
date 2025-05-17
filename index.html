@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Premier University - A Leading Institution for Academic Excellence Since 1990">
+    <meta name="keywords" content="university, higher education, degrees, research, academics">
+    <meta property="og:title" content="Premier University - Home">
+    <meta property="og:description" content="Discover academic excellence at Premier University">
+    <title>Premier University - Home</title>
+
+    <!-- Preload important resources -->
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" as="style">
+    <link rel="preload" href="style.css" as="style">
+
+    <!-- CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+    <style>
+        .list-unstyled>li>a {
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body class="d-flex flex-column min-vh-100">
+
+    <!-- Accessibility Skip Navigation -->
+    <div class="skip-nav">
+        <a href="#main-content" class="visually-hidden-focusable">Skip to main content</a>
+    </div>
+
+    <!-- Enhanced Navigation -->
+    <!-- <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top py-3 shadow-sm">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="index.html">
+                <img src="logo.svg" alt="Premier University Logo" width="40" height="40"
+                    class="d-inline-block align-text-top me-2">
+                Premier University
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                            About
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="about.html#history">History</a></li>
+                            <li><a class="dropdown-item" href="about.html#leadership">Leadership</a></li>
+                            <li><a class="dropdown-item" href="about.html#rankings">Rankings</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                            Admissions
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="admissions.html#undergraduate">Undergraduate</a></li>
+                            <li><a class="dropdown-item" href="admissions.html#graduate">Graduate</a></li>
+                            <li><a class="dropdown-item" href="admissions.html#international">International</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                            Academics
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="academics.html#programs">Programs</a></li>
+                            <li><a class="dropdown-item" href="academics.html#faculty">Faculty</a></li>
+                            <li><a class="dropdown-item" href="academics.html#research">Research</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="news.html">News & Events</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                    <li class="nav-item"><a class="btn btn-outline-light ms-2" href="portal.html">Portal Login</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav> -->
+
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="index.html">
+                <img src="img/logo.png" alt="University Logo" width="200" height="60" style="background-color: #9eb1bd7c; padding: 5px; border-radius: 8px;" class="d-inline-block align-text-top me-2"></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <!-- <li class="nav-item"><a class="nav-link active" href="#">Home</a></li> -->
+                    <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="admissions.html">Admissions</a></li>
+                    <li class="nav-item"><a class="nav-link" href="academics.html">Academics</a></li>
+                    <li class="nav-item"><a class="nav-link" href="news.html">News & Events</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                    <li class="nav-item"><a class="nav-link" href="portal/login.html">Sign-in</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main id="main-content">
+
+        <!-- Enhanced Hero Section -->
+        <section class="hero-section position-relative overflow-hidden">
+            <div class="video-container">
+                <video playsinline autoplay muted loop class="hero-video">
+                    <source src="campus.mp4" type="video/mp4">
+                    <img src="campus-fallback.jpg" alt="Campus Overview" class="fallback-image">
+                </video>
+            </div>
+            <div class="hero-overlay bg-dark opacity-75"></div>
+            <div class="hero-content container text-center text-white">
+                <div class="row justify-content-center">
+                    <div class="col-lg-8" data-aos="fade-up">
+                        <h1 class="display-4 fw-bold mb-4">Shaping the Future Through Innovation</h1>
+                        <p class="lead mb-3">Join a community of passionate learners and leaders in a world-class
+                            academic environment</p>
+                        <p class="mb-4 fst-italic">Empowering students to excel academically, socially, and professionally.</p>
+                        <div class="d-flex flex-wrap justify-content-center gap-3">
+                            <a href="admissions.html" class="btn btn-primary btn-lg px-5 py-3">Start Your Journey</a>
+                            <a href="#virtual-tour" class="btn btn-outline-light btn-lg px-5 py-3"
+                                data-bs-toggle="modal">
+                                Virtual Tour
+                            </a>
+                            <a href="contact.html" class="btn btn-outline-light btn-lg px-5 py-3">Request Info</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Key Statistics -->
+        <section class="py-7 bg-light">
+            <div class="container">
+                <div class="row g-4 text-center">
+                    <div class="col-md-2" data-aos="fade-up">
+                        <div class="card h-100 shadow-sm">
+                            <div class="card-body">
+                                <h3 class="text-primary">95%</h3>
+                                <p class="mb-0">Graduation Rate</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2" data-aos="fade-up" data-aos-delay="100">
+                        <div class="card h-100 shadow-sm">
+                            <div class="card-body">
+                                <h3 class="text-primary">200+</h3>
+                                <p class="mb-0">Academic Programs</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2" data-aos="fade-up" data-aos-delay="200">
+                        <div class="card h-100 shadow-sm">
+                            <div class="card-body">
+                                <h3 class="text-primary">#1</h3>
+                                <p class="mb-0">In Research Innovation</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2" data-aos="fade-up" data-aos-delay="300">
+                        <div class="card h-100 shadow-sm">
+                            <div class="card-body">
+                                <h3 class="text-primary">90+</h3>
+                                <p class="mb-0">Countries Represented</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2" data-aos="fade-up" data-aos-delay="400">
+                        <div class="card h-100 shadow-sm">
+                            <div class="card-body">
+                                <h3 class="text-primary">15:1</h3>
+                                <p class="mb-0">Student-Faculty Ratio</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2" data-aos="fade-up" data-aos-delay="500">
+                        <div class="card h-100 shadow-sm">
+                            <div class="card-body">
+                                <h3 class="text-primary">85%</h3>
+                                <p class="mb-0">Employment Rate</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Featured News Carousel -->
+        <section class="py-7">
+            <div class="container">
+                <h2 class="text-center mb-5">Latest News & Events</h2>
+                <div id="newsCarousel" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <div class="row g-4">
+                                <div class="col-md-4">
+                                    <div class="card h-100 news-card">
+                                        <img src="news1.jpg" class="card-img-top" alt="Science Fair" loading="lazy">
+                                        <div class="card-body">
+                                            <span class="badge bg-primary mb-2">Event</span>
+                                            <h5 class="card-title">Annual Science Fair 2023</h5>
+                                            <p class="card-text">Explore groundbreaking student innovations and research
+                                                projects...</p>
+                                            <a href="#" class="stretched-link">Read More</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="card h-100 news-card">
+                                        <img src="news2.jpg" class="card-img-top" alt="New Library Opening" loading="lazy">
+                                        <div class="card-body">
+                                            <span class="badge bg-success mb-2">Announcement</span>
+                                            <h5 class="card-title">New Library Opening</h5>
+                                            <p class="card-text">Premier University inaugurates its state-of-the-art library...</p>
+                                            <a href="#" class="stretched-link">Read More</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="card h-100 news-card">
+                                        <img src="news3.jpg" class="card-img-top" alt="Scholarship Program" loading="lazy">
+                                        <div class="card-body">
+                                            <span class="badge bg-info mb-2">Opportunity</span>
+                                            <h5 class="card-title">Scholarship Program 2023</h5>
+                                            <p class="card-text">Apply now for merit-based scholarships for the upcoming academic year...</p>
+                                            <a href="#" class="stretched-link">Read More</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#newsCarousel"
+                        data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#newsCarousel"
+                        data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Alumni Success Section -->
+        <section class="py-7 bg-light my-5">
+            <div class="container">
+                <h2 class="text-center mb-5">Alumni Success Stories</h2>
+                <div class="row g-4">
+                    <div class="col-md-4" data-aos="fade-up">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <blockquote class="blockquote mb-0">
+                                    <p>"The university's entrepreneurship program gave me the tools to launch my
+                                        startup."</p>
+                                    <footer class="blockquote-footer mt-3">
+                                        Sarah Johnson <cite title="Company">CEO, Tech Innovators</cite>
+                                    </footer>
+                                </blockquote>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <blockquote class="blockquote mb-0">
+                                    <p>"Thanks to the faculty's support, I secured a position at a leading research lab."</p>
+                                    <footer class="blockquote-footer mt-3">
+                                        Michael Lee <cite title="Company">Research Scientist, BioTech Labs</cite>
+                                    </footer>
+                                </blockquote>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <blockquote class="blockquote mb-0">
+                                    <p>"The diverse community and academic rigor prepared me for a global career."</p>
+                                    <footer class="blockquote-footer mt-3">
+                                        Amina Patel <cite title="Company">International Consultant, Global Solutions</cite>
+                                    </footer>
+                                </blockquote>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Call to Action Section -->
+        <section class="py-7 bg-primary text-white">
+            <div class="container text-center">
+                <h2 class="mb-4">Ready to Join Our Community?</h2>
+                <div class="d-flex flex-wrap justify-content-center gap-3">
+                    <a href="admissions.html" class="btn btn-light btn-lg px-5">Apply Now</a>
+                    <a href="contact.html" class="btn btn-outline-light btn-lg px-5">Schedule Visit</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Programs Offered Section -->
+        <section class="py-7 bg-light">
+            <div class="container">
+                <h2 class="text-center mb-5">Programs Offered</h2>
+                <div class="row g-4">
+                    <div class="col-md-4" data-aos="fade-up">
+                        <div class="card h-100 shadow-sm">
+                            <img src="program1.jpg" class="card-img-top" alt="Computer Science" loading="lazy">
+                            <div class="card-body">
+                                <h5 class="card-title">Computer Science</h5>
+                                <p class="card-text">Explore cutting-edge technology and software development with our comprehensive computer science program.</p>
+                                <a href="academics.html#programs" class="btn btn-primary">Learn More</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+                        <div class="card h-100 shadow-sm">
+                            <img src="program2.jpg" class="card-img-top" alt="Business Administration" loading="lazy">
+                            <div class="card-body">
+                                <h5 class="card-title">Business Administration</h5>
+                                <p class="card-text">Develop leadership and management skills to excel in the global business environment.</p>
+                                <a href="academics.html#programs" class="btn btn-primary">Learn More</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+                        <div class="card h-100 shadow-sm">
+                            <img src="program3.jpg" class="card-img-top" alt="Environmental Science" loading="lazy">
+                            <div class="card-body">
+                                <h5 class="card-title">Environmental Science</h5>
+                                <p class="card-text">Engage in sustainability and conservation efforts through our environmental science courses.</p>
+                                <a href="academics.html#programs" class="btn btn-primary">Learn More</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Campus Life Section -->
+        <section class="py-7">
+            <div class="container">
+                <h2 class="text-center mb-5">Campus Life</h2>
+                <div class="row g-4">
+                    <div class="col-md-4" data-aos="fade-up">
+                        <img src="campus-life1.jpg" alt="Student Club Meeting" class="img-fluid rounded shadow-sm" loading="lazy">
+                        <h5 class="mt-3">Vibrant Student Clubs</h5>
+                        <p>Join a variety of student organizations and clubs to enrich your university experience.</p>
+                    </div>
+                    <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+                        <img src="campus-life2.jpg" alt="Sports Facilities" class="img-fluid rounded shadow-sm" loading="lazy">
+                        <h5 class="mt-3">State-of-the-Art Sports Facilities</h5>
+                        <p>Stay active and healthy with access to modern sports complexes and fitness centers.</p>
+                    </div>
+                    <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+                        <img src="campus-life3.jpg" alt="Campus Events" class="img-fluid rounded shadow-sm" loading="lazy">
+                        <h5 class="mt-3">Exciting Campus Events</h5>
+                        <p>Participate in cultural, academic, and social events throughout the year.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Research Highlights Section -->
+        <section class="py-7 bg-light">
+            <div class="container">
+                <h2 class="text-center mb-5">Research Highlights</h2>
+                <div class="row g-4">
+                    <div class="col-md-4" data-aos="fade-up">
+                        <div class="card h-100 shadow-sm">
+                            <img src="research1.jpg" class="card-img-top" alt="AI Research" loading="lazy">
+                            <div class="card-body">
+                                <h5 class="card-title">Artificial Intelligence</h5>
+                                <p class="card-text">Pioneering AI research to transform industries and improve lives.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+                        <div class="card h-100 shadow-sm">
+                            <img src="research2.jpg" class="card-img-top" alt="Renewable Energy" loading="lazy">
+                            <div class="card-body">
+                                <h5 class="card-title">Renewable Energy</h5>
+                                <p class="card-text">Innovative projects focused on sustainable energy solutions.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+                        <div class="card h-100 shadow-sm">
+                            <img src="research3.jpg" class="card-img-top" alt="Biomedical Engineering" loading="lazy">
+                            <div class="card-body">
+                                <h5 class="card-title">Biomedical Engineering</h5>
+                                <p class="card-text">Advancing healthcare through cutting-edge biomedical technologies.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Enhanced Footer -->
+    <footer class="bg-dark text-white mt-auto">
+        <div class="container py-5">
+            <div class="row g-5">
+                <div class="col-lg-4">
+                    <h5 class="text-uppercase mb-4">Contact Information</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-3">
+                            <i class="bi bi-geo-alt-fill me-2"></i>
+                            123 University Avenue, Education City
+                        </li>
+                        <li class="mb-3">
+                            <i class="bi bi-telephone-fill me-2"></i>
+                            +1 (555) 123-4567
+                        </li>
+                        <li class="mb-3">
+                            <i class="bi bi-envelope-fill me-2"></i>
+                            info@premieruniv.edu
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-lg-4">
+                    <h5 class="text-uppercase mb-4">Quick Links</h5>
+                    <div class="row">
+                        <div class="col-6">
+                            <ul class="list-unstyled">
+                                <li class="mb-2"><a href="about.html" class="text-white">About Us</a></li>
+                                <li class="mb-2"><a href="admissions.html" class="text-white">Admissions</a></li>
+                                <li class="mb-2"><a href="academics.html" class="text-white">Programs</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-6">
+                            <ul class="list-unstyled">
+                                <li class="mb-2"><a href="news.html" class="text-white">News</a></li>
+                                <li class="mb-2"><a href="contact.html" class="text-white">Contact</a></li>
+                                <li class="mb-2"><a href="portal.html" class="text-white">Portal</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <h5 class="text-uppercase mb-4">Connect With Us</h5>
+                    <div class="social-links d-flex gap-3">
+                        <a href="#" class="text-white fs-5"><i class="bi bi-facebook"></i></a>
+                        <a href="#" class="text-white fs-5"><i class="bi bi-twitter-x"></i></a>
+                        <a href="#" class="text-white fs-5"><i class="bi bi-linkedin"></i></a>
+                        <a href="#" class="text-white fs-5"><i class="bi bi-youtube"></i></a>
+                        <a href="#" class="text-white fs-5"><i class="bi bi-instagram"></i></a>
+                    </div>
+                    <div class="mt-4">
+                        <p class="mb-2">Subscribe to our newsletter:</p>
+                        <form class="input-group">
+                            <input type="email" class="form-control" placeholder="Enter your email">
+                            <button class="btn btn-primary" type="button">Subscribe</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-5 pt-4 border-top">
+                <p class="mb-0">&copy; 2023 Premier University. All rights reserved.
+                    <a href="#" class="text-white">Privacy Policy</a> |
+                    <a href="#" class="text-white">Terms of Use</a>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button class="btn btn-primary btn-back-top shadow" aria-label="Back to top">
+        <i class="bi bi-chevron-up"></i>
+    </button>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Initialize AOS (Animate On Scroll)
+        AOS.init({
+            duration: 1000,
+            once: true,
+            easing: 'ease-in-out'
+        });
+
+        // Enhanced Scroll Handling
+        document.addEventListener('DOMContentLoaded', () => {
+            const scrollButton = document.querySelector('.btn-back-top');
+
+            window.addEventListener('scroll', () => {
+                scrollButton.style.display = window.scrollY > 300 ? 'block' : 'none';
+            });
+
+            scrollButton.addEventListener('click', () => {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Lazy Load Images
+        if ('loading' in HTMLImageElement.prototype) {
+            document.querySelectorAll('img[loading="lazy"]').forEach(img => {
+                img.loading = 'lazy';
+            });
+        }
+    </script>
+</body>
+
+</html>

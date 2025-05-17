@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premier University - Academics</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <style>
+        /* Custom Styles */
+        .academics-hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('img/dom-fou-YRMWVcdyhmI-unsplash.jpg') center/cover;
+            height: 60vh;
+            margin-top: 56px;
+        }
+
+        /* Updated Faculty Flip Cards CSS */
+        /* Faculty Flip Cards */
+        .faculty-flip-card {
+            perspective: 1000px;
+            min-height: 400px;
+        }
+
+        .faculty-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+        }
+
+        .faculty-flip-card:hover .faculty-inner {
+            transform: rotateY(180deg);
+        }
+
+        .faculty-front,
+        .faculty-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .faculty-front {
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+
+        .faculty-front::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.5);
+            /* Overlay for text visibility */
+            z-index: 1;
+        }
+
+        .faculty-front .card-title {
+            position: relative;
+            z-index: 2;
+            font-size: 1.25rem;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+            width: 80%;
+        }
+
+        .faculty-back {
+            transform: rotateY(180deg);
+            background-size: cover;
+            background-position: center;
+            color: #333;
+        }
+
+        .faculty-back::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(255, 255, 255, 0.92);
+            /* Background for better readability */
+            z-index: 1;
+        }
+
+        .faculty-back .card-body {
+            position: relative;
+            z-index: 2;
+            height: 100%;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .faculty-back h4 {
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .faculty-back .list-group-item {
+            background: transparent;
+            border: none;
+            padding: 0.4rem 0;
+        }
+
+
+        /* Course Search Animation */
+        /* Search Activation */
+        #courseSearch:focus {
+            box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+            border-color: #86b7fe;
+        }
+
+        /* Course Search Animation */
+        /* Update the CSS for no results message */
+        .no-results-container {
+            display: none;
+            text-align: center;
+            padding: 2rem;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .no-results-container.active {
+            display: block;
+        }
+
+        .no-results-card {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .no-results-card h4 {
+            color: #dc3545;
+            margin-bottom: 1rem;
+        }
+
+        .no-results-card p {
+            color: #6c757d;
+            margin-bottom: 0;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Resource Cards */
+        .resource-card {
+            transition: all 0.3s ease;
+        }
+
+        .resource-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Scroll to Top Button */
+        .btn-back-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 1000;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: none;
+            transition: all 0.3s ease;
+        }
+
+        .btn-back-top.show {
+            display: block;
+            animation: fadeInUp 0.3s ease;
+        }
+
+        .list-unstyled>li>a {
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="index.html">
+                <img src="img/logo.png" alt="University Logo" width="200" height="58" style="background-color: #9eb1bd7c; padding: 5px; border-radius: 8px;"
+                    class="d-inline-block align-text-top me-2"></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <!-- <li class="nav-item"><a class="nav-link active" href="#">Home</a></li> -->
+                    <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="admissions.html">Admissions</a></li>
+                    <li class="nav-item"><a class="nav-link" href="academics.html">Academics</a></li>
+                    <li class="nav-item"><a class="nav-link" href="news.html">News & Events</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                    <li class="nav-item"><a class="nav-link" href="portal/login.html">Sign-in</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Enhanced Hero Section -->
+    <header class="academics-hero" style="height: 70vh;">
+        <div class="container h-100 d-flex align-items-center">
+            <div class="text-white text-center">
+                <h1 class="display-3 fw-bold">Academic Excellence</h1>
+                <p class="lead fs-4">Shape Your Future Through Innovation and Discovery</p>
+            </div>
+        </div>
+    </header>
+
+    <!-- A. Enhanced Faculty Section -->
+    <section class="py-5">
+        <div class="container">
+            <h2 class="text-center mb-5 display-4">Our Faculties</h2>
+
+            <div class="row g-4" id="facultyContainer">
+                <!-- Faculty items will be dynamically loaded -->
+            </div>
+        </div>
+    </section>
+
+    <!-- B. Enhanced Course Search -->
+    <section class="py-5 bg-light" id="programs">
+        <div class="container">
+            <h2 class="text-center mb-5 display-4">Find Your Program</h2>
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <div class="card border-0 shadow-lg">
+                        <div class="card-body p-4">
+                            <div class="input-group mb-4">
+                                <input type="text" class="form-control form-control-lg" placeholder="Search programs..."
+                                    id="courseSearch">
+                                <button class="btn btn-primary btn-lg" type="button">
+                                    <i class="bi bi-search"></i>
+                                </button>
+                            </div>
+
+                            <div class="d-flex flex-wrap gap-3 mb-4">
+                                <div class="btn-group flex-wrap" role="group" aria-label="Program level selection">
+                                    <input type="radio" class="btn-check" name="programLevel" id="allPrograms"
+                                        autocomplete="off" checked>
+                                    <label class="btn btn-outline-primary" for="allPrograms">
+                                        <i class="bi bi-list-ul me-2"></i>All
+                                    </label>
+
+                                    <input type="radio" class="btn-check" name="programLevel" id="undergrad"
+                                        autocomplete="off">
+                                    <label class="btn btn-outline-primary" for="undergrad">
+                                        <i class="bi bi-mortarboard me-2"></i>Bachelors
+                                    </label>
+
+                                    <input type="radio" class="btn-check" name="programLevel" id="masters"
+                                        autocomplete="off">
+                                    <label class="btn btn-outline-primary" for="masters">
+                                        <i class="bi bi-briefcase me-2"></i>Masters
+                                    </label>
+
+                                    <input type="radio" class="btn-check" name="programLevel" id="doctoral"
+                                        autocomplete="off">
+                                    <label class="btn btn-outline-primary" for="doctoral">
+                                        <i class="bi bi-award me-2"></i>Doctoral
+                                    </label>
+
+                                    <input type="radio" class="btn-check" name="programLevel" id="online"
+                                        autocomplete="off">
+                                    <label class="btn btn-outline-primary" for="online">
+                                        <i class="bi bi-laptop me-2"></i>Online
+                                    </label>
+
+                                    <input type="radio" class="btn-check" name="programLevel" id="certificates"
+                                        autocomplete="off">
+                                    <label class="btn btn-outline-primary" for="certificates">
+                                        <i class="bi bi-file-text me-2"></i>Certificates
+                                    </label>
+
+                                    <input type="radio" class="btn-check" name="programLevel" id="minors"
+                                        autocomplete="off">
+                                    <label class="btn btn-outline-primary" for="minors">
+                                        <i class="bi bi-journal-bookmark me-2"></i>Minors
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div id="courseResults" class="row g-3"></div>
+                            <div id="noResults" class="no-results-container">
+                                <div class="no-results-card">
+                                    <h4>Program Not Available</h4>
+                                    <p>The program you're searching for isn't currently offered. Please check back next
+                                        semester or try a different search term.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- C. Enhanced Student Resources -->
+    <section class="py-5">
+        <div class="container">
+            <h2 class="text-center mb-5 display-4">Student Resources</h2>
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-3">
+                    <div class="resource-card card h-100 border-0 shadow">
+                        <div class="card-body text-center p-4">
+                            <i class="bi bi-journal-bookmark fs-1 text-primary mb-3"></i>
+                            <h5>Academic Calendar</h5>
+                            <p>Access important dates and deadlines</p>
+                            <a href="#" class="btn btn-outline-primary stretched-link">
+                                View Calendar
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Additional Resource Cards -->
+                <div class="col-md-6 col-lg-3">
+                    <div class="resource-card card h-100 border-0 shadow">
+                        <div class="card-body text-center p-4">
+                            <i class="bi bi-mortarboard fs-1 text-success mb-3"></i>
+                            <h5>Academic Advising</h5>
+                            <p>Schedule appointments with advisors</p>
+                            <a href="#" class="btn btn-outline-success stretched-link">
+                                Book Now
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Add 2 more resource cards -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Enhanced Footer -->
+    <footer class="bg-dark text-white py-4 mt-auto">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-md-3">
+                    <h5>Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-white">Admissions</a></li>
+                        <li><a href="#" class="text-white">Academic Calendar</a></li>
+                        <li><a href="#" class="text-white">Student Portal</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h5>Resources</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-white">Library</a></li>
+                        <li><a href="#" class="text-white">Career Services</a></li>
+                        <li><a href="#" class="text-white">Alumni Network</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h5>Legal</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-white">Privacy Policy</a></li>
+                        <li><a href="#" class="text-white">Terms of Service</a></li>
+                        <li><a href="#" class="text-white">Accessibility</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h5>Connect</h5>
+                    <div class="social-links">
+                        <a href="#" class="text-white me-2"><i class="bi bi-facebook"></i></a>
+                        <a href="#" class="text-white me-2"><i class="bi bi-twitter-x"></i></a>
+                        <a href="#" class="text-white me-2"><i class="bi bi-linkedin"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-4 pt-3 border-top">
+                <p class="mb-0">&copy; 2023 Premier University. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Enhanced Scroll to Top Button -->
+    <button class="btn btn-primary btn-back-top">
+        <i class="bi bi-chevron-up"></i>
+    </button>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="scripts.js"></script>
+    <script>
+        // // A. Faculty Data and Initialization
+        // Updated Faculty Data and Initialization
+        const faculties = [
+            {
+                name: "Engineering",
+                frontImage: "img/amy-harrison-4ip6AOJPztQ-unsplash.jpg",
+                backImage: "img/dom-fou-YRMWVcdyhmI-unsplash.jpg",
+                programs: [
+                    "Civil Engineering",
+                    "Mechanical Engineering",
+                    "Electrical Engineering",
+                    "Computer Engineering",
+                    "Aerospace Engineering",
+                    "Biomedical Engineering"
+                ]
+            },
+            {
+                name: "Business & Management",
+                frontImage: "img/amy-harrison-4ip6AOJPztQ-unsplash.jpg",
+                backImage: "img/dom-fou-YRMWVcdyhmI-unsplash.jpg",
+                programs: [
+                    "Accounting (BS/MS)",
+                    "Finance (BS)",
+                    "MBA (Master's)",
+                    "Entrepreneurship (BS)",
+                    "Human Resource Management (BS)",
+                    "DBA (Doctorate)"
+                ]
+            },
+            {
+                name: "Computer & Information Sciences",
+                frontImage: "img/amy-harrison-4ip6AOJPztQ-unsplash.jpg",
+                backImage: "img/dom-fou-YRMWVcdyhmI-unsplash.jpg",
+                programs: [
+                    "Computer Science (BS/MS/PhD)",
+                    "Cybersecurity (BS/MS)",
+                    "Data Science (BS/MS)",
+                    "Cloud Computing (BS)",
+                    "Artificial Intelligence (MS)",
+                    "Bioinformatics (MS)"
+                ]
+            },
+            {
+                name: "Health & Life Sciences",
+                frontImage: "img/amy-harrison-4ip6AOJPztQ-unsplash.jpg",
+                backImage: "img/dom-fou-YRMWVcdyhmI-unsplash.jpg",
+                programs: [
+                    "Nursing (BS/MS/PhD)",
+                    "Biotechnology (BS)",
+                    "Public Health (MPH/DrPH)",
+                    "Nutritional Sciences (BS)",
+                    "Medical Laboratory Science (BS)",
+                    "Pharmaceutical Chemistry (MS)"
+                ]
+            },
+            {
+                name: "Arts & Humanities",
+                frontImage: "img/amy-harrison-4ip6AOJPztQ-unsplash.jpg",
+                backImage: "img/dom-fou-YRMWVcdyhmI-unsplash.jpg",
+                programs: [
+                    "Graphic Design (BS)",
+                    "Music (BA/MA)",
+                    "Theater Arts (BA)",
+                    "Screenwriting & Animation (BFA)",
+                    "Art History (BA)",
+                    "Digital Media Arts (BS)"
+                ]
+            },
+            {
+                name: "Social Sciences",
+                frontImage: "img/amy-harrison-4ip6AOJPztQ-unsplash.jpg",
+                backImage: "img/dom-fou-YRMWVcdyhmI-unsplash.jpg",
+                programs: [
+                    "Psychology (BS/MS/PhD)",
+                    "Sociology (BA/MA/PhD)",
+                    "Political Science (BA)",
+                    "Social Work (BSW/MSW/PhD)",
+                    "Urban Studies (BA)",
+                    "International Relations (MA)"
+                ]
+            },
+            {
+                name: "Education",
+                frontImage: "img/amy-harrison-4ip6AOJPztQ-unsplash.jpg",
+                backImage: "img/dom-fou-YRMWVcdyhmI-unsplash.jpg",
+                programs: [
+                    "Elementary Education (BS)",
+                    "Educational Leadership (MS/EdD)",
+                    "Curriculum Design (MA)",
+                    "Special Education (MS)",
+                    "Higher Education Administration (PhD)",
+                    "Educational Technology (MS)"
+                ]
+            },
+            {
+                name: "Environmental Studies",
+                frontImage: "img/amy-harrison-4ip6AOJPztQ-unsplash.jpg",
+                backImage: "img/dom-fou-YRMWVcdyhmI-unsplash.jpg",
+                programs: [
+                    "Environmental Science (BS/MS)",
+                    "Sustainable Energy (MS)",
+                    "Urban Planning (MCRP)",
+                    "Climate Studies (PhD)",
+                    "Ecology (BS)",
+                    "Environmental Policy (MA)"
+                ]
+            }
+            // Add other faculties...
+        ];
+
+        function renderFaculties() {
+            const container = document.getElementById('facultyContainer');
+            container.innerHTML = faculties.map(faculty => `
+            <div class="col-md-6 col-lg-4 col-xl-3 faculty-flip-card">
+                <div class="faculty-inner">
+                    <div class="faculty-front card h-100 border-0" style="background-image: url('${faculty.frontImage}')">
+                        <h3 class="card-title mb-0">${faculty.name}</h3>
+                    </div>
+                    <div class="faculty-back card h-100" style="background-image: url('${faculty.backImage}')">
+                        <div class="card-body">
+                            <h4 class="h5">Programs Offered:</h4>
+                            <ul class="list-group list-group-flush small">
+                                ${faculty.programs.map(p => `
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        ${p}
+                                        <span class="badge bg-primary rounded-pill">+</span>
+                                    </li>
+                                `).join('')}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            `).join('');
+        }
+
+
+        // Initialize on load
+        document.addEventListener('DOMContentLoaded', renderFaculties);
+
+        // B. Course Search Functionality
+        const allPrograms = [
+            // Undergraduate Programs
+            { name: "Accounting (BS)", level: "undergrad", faculty: "Business", duration: "4 Years" },
+            { name: "Computer Science (BS)", level: "undergrad", faculty: "Computing", duration: "4 Years" },
+            { name: "Civil Engineering (BS)", level: "undergrad", faculty: "Engineering", duration: "5 Years" },
+
+            // Masters Programs
+            { name: "Accounting (MS)", level: "masters", faculty: "Business", duration: "2 Years" },
+            { name: "Applied Neuroscience (MS)", level: "masters", faculty: "Science", duration: "2 Years" },
+            { name: "Business Administration (MBA)", level: "masters", faculty: "Management", duration: "2 Years" },
+
+            // Doctoral Programs
+            { name: "Advanced Computing (PhD)", level: "doctoral", faculty: "Computing", duration: "4-6 Years" },
+            { name: "Business Administration (PhD)", level: "doctoral", faculty: "Management", duration: "4-6 Years" },
+            { name: "Social Work (PhD)", level: "doctoral", faculty: "Social Sciences", duration: "4-6 Years" },
+
+            // Online Programs
+            { name: "Applied Liberal Studies (BS) Online", level: "online", faculty: "Liberal Arts", duration: "4 Years" },
+            { name: "Cloud Computing (BS) Online", level: "online", faculty: "Computing", duration: "4 Years" },
+            { name: "MBA Online", level: "online", faculty: "Management", duration: "2 Years" },
+
+            // Certificates
+            { name: "Project Management PBCPM", level: "certificates", faculty: "Management", duration: "1 Year" },
+            { name: "Sustainable Urban Communities", level: "certificates", faculty: "Urban Studies", duration: "1 Year" },
+
+            // Minors
+            { name: "Computer Science Minor", level: "minors", faculty: "Computing", duration: "2 Years" },
+            { name: "Entrepreneurship Minor", level: "minors", faculty: "Business", duration: "2 Years" },
+            { name: "Psychology Minor", level: "minors", faculty: "Social Sciences", duration: "2 Years" },
+
+            // Add remaining 100+ programs following the same pattern
+        ];
+
+        function filterPrograms() {
+            const searchTerm = document.getElementById('courseSearch').value.toLowerCase();
+            const selectedLevel = document.querySelector('input[name="programLevel"]:checked').id;
+
+            const results = allPrograms.filter(program => {
+                const matchesSearch = program.name.toLowerCase().includes(searchTerm);
+                const matchesLevel = selectedLevel === 'allPrograms' || program.level === selectedLevel;
+                return matchesSearch && matchesLevel;
+            });
+
+            displayResults(results);
+        }
+
+        // Modified displayResults function
+        function displayResults(results) {
+            const container = document.getElementById('courseResults');
+            const noResults = document.getElementById('noResults');
+
+            if (results.length === 0) {
+                container.innerHTML = '';
+                noResults.classList.add('active');
+            }
+            else {
+                noResults.classList.remove('active');
+                container.innerHTML = results.map(program => `
+                    <div class="col-12 course-result">
+                        <div class="card mb-3 shadow-sm">
+                            <div class="card-body">
+                                <div class="row align-items-center">
+                                    <div class="col-md-8">
+                                        <h5 class="mb-1">${program.name}</h5>
+                                        <div class="d-flex gap-2 align-items-center">
+                                            <span class="badge ${getLevelBadgeClass(program.level)}">
+                                                ${program.level.toUpperCase()}
+                                            </span>
+                                            <small class="text-muted">${program.faculty}</small>
+                                            <small class="text-muted">${program.duration}</small>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 text-md-end mt-2 mt-md-0">
+                                        <button class="btn btn-sm btn-outline-primary">
+                                            <i class="bi bi-info-circle me-1"></i>Details
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    `).join('');
+
+                // Animate results
+                setTimeout(() => {
+                    document.querySelectorAll('.course-result').forEach(el => {
+                        el.classList.add('show');
+                    });
+                }, 50);
+            }
+        }
+
+        function getLevelBadgeClass(level) {
+            const badgeClasses = {
+                'undergrad': 'bg-primary',
+                'masters': 'bg-success',
+                'doctoral': 'bg-danger',
+                'online': 'bg-warning text-dark',
+                'certificates': 'bg-info',
+                'minors': 'bg-purple text-white'
+            };
+            return badgeClasses[level] || 'bg-secondary';
+        }
+
+        // Event listeners
+        document.querySelectorAll('input[name="programLevel"]').forEach(radio => {
+            radio.addEventListener('change', filterPrograms);
+        });
+        document.getElementById('courseSearch').addEventListener('input', filterPrograms);
+
+        // Initial filter call
+        filterPrograms();
+
+        // C. Resource Card Hover Effects
+        document.querySelectorAll('.resource-card').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.transform = 'translateY(-5px)';
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'translateY(0)';
+            });
+        });
+
+        // C. Resource Card Hover Effects
+        document.querySelectorAll('.resource-card').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.transform = 'translateY(-5px)';
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'translateY(0)';
+            });
+        });
+
+        // Enhanced Scroll to Top Functionality
+        const scrollButton = document.querySelector('.btn-back-top');
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                scrollButton.classList.add('show');
+            } else {
+                scrollButton.classList.remove('show');
+            }
+        });
+
+        scrollButton.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Initialize Tooltips
+        const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+        [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl));
+
+        // Animate Elements on Scroll
+        const animateOnScroll = () => {
+            const elements = document.querySelectorAll('.animate-on-scroll');
+
+            elements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const elementBottom = element.getBoundingClientRect().bottom;
+
+                if (elementTop < window.innerHeight && elementBottom > 0) {
+                    element.classList.add('animated');
+                }
+            });
+        };
+
+        window.addEventListener('scroll', animateOnScroll);
+        animateOnScroll(); // Initial check
+    </script>
+</body>
+
+</html>

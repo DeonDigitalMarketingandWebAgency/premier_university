@@ -1,0 +1,921 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Welcome to Premier University - Transforming Education Since 1990">
+    <title>Premier University - Home</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link href="style.css" rel="stylesheet">
+    <style>
+        /* Custom Styles */
+        /* Improved Hero Section */
+        .about-hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('img/tai-bui-HzVBe-8frwc-unsplash.jpg') center/cover;
+            height: 70vh;
+            margin-top: 60px;
+            /* Reduced space */
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+
+        /* Enhanced Timeline */
+        .timeline {
+            position: relative;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 6px;
+            background: var(--bs-primary);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -3px;
+        }
+
+        .timeline-item {
+            padding: 20px 40px;
+            position: relative;
+            width: 50%;
+            transition: transform 0.3s ease;
+        }
+
+        .timeline-item:nth-child(odd) {
+            left: 0;
+            transform: translateX(30px);
+        }
+
+        .timeline-item:nth-child(even) {
+            left: 50%;
+            transform: translateX(-30px);
+        }
+
+        .timeline-content {
+            padding: 30px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        .leadership-card {
+            transition: transform 0.3s ease;
+            border: none;
+            overflow: hidden;
+        }
+
+        /* Leadership Cards */
+        .leadership-card {
+            border: 2px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .leadership-card img {
+            border-bottom: 3px solid var(--bs-primary);
+        }
+
+        .leadership-bio {
+            height: 120px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .leadership-bio::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 30px;
+            background: linear-gradient(to bottom, transparent, white);
+        }
+
+        /* Virtual Campus Tour */
+        /* .campus-map {
+            height: 500px;
+            background: url('assets/img/campus-map.jpg') center/cover;
+            border-radius: 15px;
+            position: relative;
+        }
+
+        .map-marker {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background: var(--bs-danger);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .map-marker:hover {
+            transform: scale(1.2);
+        }
+
+        .stats-counter {
+            background: linear-gradient(135deg, #2c3e50, #3498db);
+            color: white;
+            padding: 80px 0;
+        }
+
+        @media (max-width: 768px) {
+            .timeline::after {
+                left: 31px;
+            }
+
+            .timeline-item {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 25px;
+            }
+
+            .timeline-item:nth-child(odd),
+            .timeline-item:nth-child(even) {
+                left: 0;
+                transform: none;
+            }
+        } */
+
+        .campus-tour-container {
+            position: relative;
+            border: 3px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .campus-tour-container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .highlight-card {
+            transition: transform 0.3s ease;
+            min-height: 180px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .highlight-card:hover {
+            transform: scale(1.05);
+        }
+
+        .tour-controls button {
+            transition: all 0.3s ease;
+        }
+
+        .tour-controls button:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Alumni Cards Styling */
+        .alumni-card {
+            transition: all 0.3s ease;
+            border-radius: 15px;
+            overflow: hidden;
+        }
+
+        .alumni-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .alumni-card .card-img-top {
+            height: 250px;
+            object-fit: cover;
+            object-position: top;
+        }
+
+        .alumni-card blockquote {
+            border-left: 4px solid var(--bs-primary);
+            padding-left: 1.5rem;
+            margin-left: 0;
+        }
+
+        .hover-shadow {
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .hover-shadow:hover {
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        /* New Mission/Vision Section */
+        .mission-vision {
+            padding: 80px 0;
+            background: #f8f9fa;
+        }
+
+        .mission-vision .card {
+            border: none;
+            border-radius: 15px;
+            transition: transform 0.3s ease;
+        }
+
+        .mission-vision .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .cta-section {
+            background: linear-gradient(135deg, #2c3e50, #3498db);
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        /* FAQ Section */
+        .faq-card {
+            border: none;
+            margin-bottom: 1rem;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+
+        .faq-header button {
+            font-weight: 600;
+            padding: 1.5rem;
+        }
+
+        /* Scroll to Top Button */
+        .btn-back-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 1000;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: none;
+            transition: all 0.3s ease;
+        }
+
+        .btn-back-top.show {
+            display: block;
+            animation: fadeInUp 0.3s ease;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Mobile Optimization */
+        @media (max-width: 768px) {
+            .about-hero {
+                height: 50vh;
+                margin-top: 56px;
+            }
+
+            .leadership-card img {
+                height: 200px;
+            }
+
+            .timeline::after {
+                left: 31px;
+            }
+        }
+
+        .list-unstyled>li>a {
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Skip Navigation -->
+    <a href="#main-content" class="skip-nav">Skip to main content</a>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="index.html">
+                <img src="img/logo.png" alt="University Logo" width="200" height="60" style="background-color: #9eb1bd7c; padding: 5px; border-radius: 6px;"
+                    class="d-inline-block align-text-top me-2"></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <!-- <li class="nav-item"><a class="nav-link active" href="#">Home</a></li> -->
+                    <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="admissions.html">Admissions</a></li>
+                    <li class="nav-item"><a class="nav-link" href="academics.html">Academics</a></li>
+                    <li class="nav-item"><a class="nav-link" href="news.html">News & Events</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                    <li class="nav-item"><a class="nav-link" href="portal/login.html">Sign-in</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="about-hero">
+        <div class="container">
+            <div class="text-white text-center">
+                <h1 class="display-3 fw-bold mb-4">Shaping Minds Since 1990</h1>
+                <div class="d-flex gap-3 justify-content-center flex-wrap">
+                    <a href="#history" class="btn btn-primary btn-lg">Explore History</a>
+                    <a href="#leadership" class="btn btn-outline-light btn-lg">Meet Leaders</a>
+                    <a href="#faq" class="btn btn-outline-light btn-lg">FAQs</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- University Stats -->
+    <section class="stats-counter">
+        <div class="container">
+            <div class="row text-center g-4">
+                <div class="col-md-3">
+                    <div class="display-4 fw-bold" data-counter="25000">0</div>
+                    <p class="mb-0">Alumni Worldwide</p>
+                </div>
+                <div class="col-md-3">
+                    <div class="display-4 fw-bold" data-counter="95">0</div>
+                    <p class="mb-0">Graduation Rate</p>
+                </div>
+                <div class="col-md-3">
+                    <div class="display-4 fw-bold" data-counter="150">0</div>
+                    <p class="mb-0">Degree Programs</p>
+                </div>
+                <div class="col-md-3">
+                    <div class="display-4 fw-bold" data-counter="20">0</div>
+                    <p class="mb-0">Research Centers</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mission & Vision Section -->
+    <section class="mission-vision mt-5">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-md-6">
+                    <div class="card h-100 bg-primary text-white">
+                        <div class="card-body p-5">
+                            <h3 class="card-title display-5 mb-4"><i class="bi bi-compass"></i> Our Mission</h3>
+                            <p class="fs-4">To educate and empower the next generation of leaders through academic
+                                excellence, research, and community engagement.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card h-100 bg-dark text-white">
+                        <div class="card-body p-5">
+                            <h3 class="card-title display-5 mb-4"><i class="bi bi-eye"></i> Our Vision</h3>
+                            <p class="fs-4">To be a world-class institution recognized for innovation, inclusivity, and
+                                global impact.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Updated History Timeline -->
+    <section id="history" class="py-5 bg-light">
+        <div class="container">
+            <h2 class="text-center mb-5 display-4">Our Journey</h2>
+            <div class="timeline">
+                <!-- Existing 1990 Item -->
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="row g-4">
+                            <div class="col-md-4">
+                                <img src="assets/img/history-1990.jpg" alt="1990 Campus" class="img-fluid rounded">
+                            </div>
+                            <div class="col-md-8">
+                                <h3 class="text-primary">1990 - Foundation</h3>
+                                <p>Established with 200 students and 3 departments in downtown campus</p>
+                                <ul>
+                                    <li>First classes in Business, Engineering, and Liberal Arts</li>
+                                    <li>Initial faculty of 15 professors</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- New 2000 Item -->
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="row g-4">
+                            <div class="col-md-4">
+                                <img src="assets/img/history-2000.jpg" alt="2000 Expansion" class="img-fluid rounded">
+                            </div>
+                            <div class="col-md-8">
+                                <h3 class="text-primary">2000 - Expansion</h3>
+                                <p>Expanded to 10 departments and constructed new science labs</p>
+                                <ul>
+                                    <li>Introduced first postgraduate programs</li>
+                                    <li>Established international student exchange program</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- New 2010 Item -->
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="row g-4">
+                            <div class="col-md-4">
+                                <img src="assets/img/history-2010.jpg" alt="2010 Growth" class="img-fluid rounded">
+                            </div>
+                            <div class="col-md-8">
+                                <h3 class="text-primary">2010 - Global Reach</h3>
+                                <p>Opened School of Business and secured global academic partnerships</p>
+                                <ul>
+                                    <li>Established 25+ international collaborations</li>
+                                    <li>Launched online learning platform</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- New 2020 Item -->
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="row g-4">
+                            <div class="col-md-4">
+                                <img src="assets/img/history-2020.jpg" alt="2020 Achievement" class="img-fluid rounded">
+                            </div>
+                            <div class="col-md-8">
+                                <h3 class="text-primary">2020 - Excellence</h3>
+                                <p>Achieved Tier-1 national university ranking with over 10,000 students enrolled</p>
+                                <ul>
+                                    <li>Ranked #1 in research output</li>
+                                    <li>Opened new sustainable campus</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Accreditation Section -->
+    <section class="py-5">
+        <div class="container">
+            <div class="row g-4 align-items-center">
+                <div class="col-md-4">
+                    <img src="assets/img/accreditation-badge.png" alt="Accreditation" class="img-fluid">
+                </div>
+                <div class="col-md-8">
+                    <h2 class="display-5 mb-4">Globally Recognized Excellence</h2>
+                    <p class="lead">Premier University is accredited by the International Association of Universities
+                        and maintains top rankings in:</p>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <ul class="list-unstyled">
+                                <li><i class="bi bi-check2-circle text-primary me-2"></i>Business Programs</li>
+                                <li><i class="bi bi-check2-circle text-primary me-2"></i>Engineering Innovation</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <ul class="list-unstyled">
+                                <li><i class="bi bi-check2-circle text-primary me-2"></i>Research Impact</li>
+                                <li><i class="bi bi-check2-circle text-primary me-2"></i>Student Satisfaction</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Enhanced University Leadership Section -->
+    <section id="leadership" class="py-5 bg-light">
+        <div class="container">
+            <h2 class="text-center mb-5 display-4">University Leadership</h2>
+            <div class="row g-4">
+                <!-- President -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="card leadership-card h-100 shadow-lg">
+                        <img src="assets/img/leadership/president.jpg" class="card-img-top" alt="Dr. Emily Thompson"
+                            loading="lazy">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Dr. Emily Thompson</h5>
+                            <p class="text-primary fw-bold">University President</p>
+                            <div class="leadership-bio">
+                                <p class="text-muted small">PhD in Educational Leadership, 25+ years experience in
+                                    higher education</p>
+                                <ul class="list-unstyled">
+                                    <li>○ Led $500M campus expansion project</li>
+                                    <li>○ Established 15 international partnerships</li>
+                                </ul>
+                            </div>
+                            <div class="social-links mt-3">
+                                <a href="#" class="text-primary mx-2" data-bs-toggle="tooltip" title="LinkedIn Profile">
+                                    <i class="bi bi-linkedin fs-5"></i>
+                                </a>
+                                <a href="#" class="text-primary mx-2" data-bs-toggle="tooltip"
+                                    title="Research Publications">
+                                    <i class="bi bi-google-scholar fs-5"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Provost -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="card leadership-card h-100 shadow-lg">
+                        <img src="assets/img/leadership/provost.jpg" class="card-img-top" alt="Dr. Michael Chen"
+                            loading="lazy">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Dr. Michael Chen</h5>
+                            <p class="text-primary fw-bold">Chief Academic Officer</p>
+                            <div class="leadership-bio">
+                                <p class="text-muted small">PhD in Curriculum Development, Author of 5 textbooks</p>
+                                <ul class="list-unstyled">
+                                    <li>○ Oversaw 40+ program accreditations</li>
+                                    <li>○ Pioneer in hybrid learning initiatives</li>
+                                </ul>
+                            </div>
+                            <div class="social-links mt-3">
+                                <a href="#" class="text-primary mx-2" data-bs-toggle="tooltip" title="Twitter Profile">
+                                    <i class="bi bi-twitter-x fs-5"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Add 4 more leadership members following same pattern -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Campus Virtual Tour -->
+    <section class="py-5 bg-dark text-white">
+        <div class="container">
+            <h2 class="text-center mb-5 display-4">Immersive Campus Experience</h2>
+            <div class="row g-5 align-items-center">
+                <div class="col-lg-6">
+                    <div class="campus-tour-container rounded-3 overflow-hidden shadow-lg">
+                        <div id="virtualTour" style="height: 500px;">
+                            <!-- Google Maps Integration -->
+                            <iframe class="w-100 h-100" loading="lazy" allowfullscreen
+                                referrerpolicy="no-referrer-when-downgrade"
+                                src="https://www.google.com/maps/embed/v1/place?key=YOUR_API_KEY&q=Premier+University&zoom=16&maptype=satellite">
+                            </iframe>
+                        </div>
+                        <div class="tour-controls bg-black p-3 d-flex justify-content-center gap-3">
+                            <button class="btn btn-outline-light btn-sm">
+                                <i class="bi bi-arrows-fullscreen"></i> Full Screen
+                            </button>
+                            <button class="btn btn-outline-light btn-sm">
+                                <i class="bi bi-collection-play"></i> 360° Tour
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="campus-highlights">
+                        <div class="row g-4">
+                            <div class="col-6">
+                                <div class="card highlight-card h-100 border-0 bg-primary text-white">
+                                    <div class="card-body">
+                                        <i class="bi bi-building fs-1"></i>
+                                        <h5>Academic Complex</h5>
+                                        <p class="small">50+ smart classrooms & research labs</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="card highlight-card h-100 border-0 bg-success text-white">
+                                    <div class="card-body">
+                                        <i class="bi bi-book fs-1"></i>
+                                        <h5>University Library</h5>
+                                        <p class="small">1.2M volumes, 24/7 access</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="card highlight-card h-100 border-0 bg-warning text-dark">
+                                    <div class="card-body">
+                                        <i class="bi bi-droplet fs-1"></i>
+                                        <h5>Aquatic Center</h5>
+                                        <p class="small">Olympic-sized pool & training facilities</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="card highlight-card h-100 border-0 bg-info text-white">
+                                    <div class="card-body">
+                                        <i class="bi bi-tree fs-1"></i>
+                                        <h5>Green Spaces</h5>
+                                        <p class="small">200 acres of sustainable landscape</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Alumni Testimonials -->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <h2 class="text-center mb-5 display-4">Alumni Success Stories</h2>
+            <div class="row g-4">
+                <!-- Alumni Card 1 -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="card alumni-card h-100 border-0 shadow-lg hover-shadow">
+                        <img src="assets/img/alumni-1.jpg" class="card-img-top" alt="Sarah Johnson" loading="lazy">
+                        <div class="card-body">
+                            <h5 class="card-title">Sarah Johnson</h5>
+                            <p class="text-muted mb-2">BS Computer Science '12</p>
+                            <p class="text-primary fw-bold">Senior AI Engineer @ TechNovate</p>
+                            <blockquote class="blockquote mt-3">
+                                <p class="fs-5">"The hands-on research opportunities at Premier University gave me the
+                                    foundation to lead AI projects at a Fortune 500 company. The mentorship I received
+                                    continues to shape my career."</p>
+                            </blockquote>
+                            <a href="#" class="btn btn-outline-primary mt-auto">Read Full Story</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Alumni Card 2 -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="card alumni-card h-100 border-0 shadow-lg hover-shadow">
+                        <img src="assets/img/alumni-2.jpg" class="card-img-top" alt="Michael Chen" loading="lazy">
+                        <div class="card-body">
+                            <h5 class="card-title">Michael Chen</h5>
+                            <p class="text-muted mb-2">MBA '15</p>
+                            <p class="text-primary fw-bold">Founder & CEO @ GreenFuture Solutions</p>
+                            <blockquote class="blockquote mt-3">
+                                <p class="fs-5">"The entrepreneurship program helped turn my sustainability startup idea
+                                    into a viable business. We've now reduced plastic waste in 12 countries."</p>
+                            </blockquote>
+                            <a href="#" class="btn btn-outline-primary mt-auto">Watch Interview</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Alumni Card 3 -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="card alumni-card h-100 border-0 shadow-lg hover-shadow">
+                        <img src="assets/img/alumni-3.jpg" class="card-img-top" alt="Amina Diallo" loading="lazy">
+                        <div class="card-body">
+                            <h5 class="card-title">Dr. Amina Diallo</h5>
+                            <p class="text-muted mb-2">PhD Biomedical Engineering '18</p>
+                            <p class="text-primary fw-bold">Lead Researcher @ WHO</p>
+                            <blockquote class="blockquote mt-3">
+                                <p class="fs-5">"My doctoral research at Premier directly contributed to developing
+                                    affordable diagnostic tools now used in developing nations. The global perspective
+                                    here is unmatched."</p>
+                            </blockquote>
+                            <a href="#" class="btn btn-outline-primary mt-auto">View Research</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CTA Section -->
+            <div class="text-center mt-5">
+                <a href="alumni.html" class="btn btn-primary btn-lg px-5">
+                    Explore More Success Stories <i class="bi bi-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- New FAQ Section -->
+    <section id="faq" class="py-5">
+        <div class="container">
+            <h2 class="text-center mb-5 display-4">Frequently Asked Questions</h2>
+            <div class="row justify-content-center">
+                <div class="col-lg-9">
+                    <div class="accordion" id="faqAccordion">
+                        <!-- Question 1 -->
+                        <div class="faq-card mb-3">
+                            <div class="accordion-header">
+                                <button class="accordion-button collapsed fs-5" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#question1">
+                                    What accreditation does Premier University hold?
+                                </button>
+                            </div>
+                            <div id="question1" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    <p>Premier University is fully accredited by the Higher Learning Commission (HLC)
+                                        and holds specialized accreditations for:</p>
+                                    <ul>
+                                        <li>ABET for Engineering Programs</li>
+                                        <li>AACSB for Business Programs</li>
+                                        <li>NAAB for Architecture</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Question 2 -->
+                        <div class="faq-card mb-3">
+                            <div class="accordion-header">
+                                <button class="accordion-button collapsed fs-5" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#question2">
+                                    What research opportunities are available for undergraduates?
+                                </button>
+                            </div>
+                            <div id="question2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    <p>We offer numerous undergraduate research programs including:</p>
+                                    <ul>
+                                        <li>Summer Research Fellowships ($5,000 stipend)</li>
+                                        <li>Faculty-mentored projects across all disciplines</li>
+                                        <li>Annual Undergraduate Research Symposium</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Add 8 more comprehensive FAQ items -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- New CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <h2 class="display-4 mb-4">Ready to be part of our journey?</h2>
+            <p class="fs-5 mb-5">Join thousands of students and faculty making a difference around the world.</p>
+            <div class="d-flex gap-3 justify-content-center">
+                <a href="admissions.html" class="btn btn-light btn-lg px-5">Apply Now</a>
+                <a href="contact.html" class="btn btn-outline-light btn-lg px-5">Contact Us</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Enhanced Footer -->
+    <footer class="bg-dark text-white py-4 mt-auto">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-md-3">
+                    <h5>Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-white">Admissions</a></li>
+                        <li><a href="#" class="text-white">Academic Calendar</a></li>
+                        <li><a href="#" class="text-white">Student Portal</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h5>Resources</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-white">Library</a></li>
+                        <li><a href="#" class="text-white">Career Services</a></li>
+                        <li><a href="#" class="text-white">Alumni Network</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h5>Legal</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-white">Privacy Policy</a></li>
+                        <li><a href="#" class="text-white">Terms of Service</a></li>
+                        <li><a href="#" class="text-white">Accessibility</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h5>Connect</h5>
+                    <div class="social-links">
+                        <a href="#" class="text-white me-2"><i class="bi bi-facebook"></i></a>
+                        <a href="#" class="text-white me-2"><i class="bi bi-twitter-x"></i></a>
+                        <a href="#" class="text-white me-2"><i class="bi bi-linkedin"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-4 pt-3 border-top">
+                <p class="mb-0">&copy; 2023 Premier University. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Enhanced Scroll to Top Button -->
+    <button class="btn btn-primary btn-back-top">
+        <i class="bi bi-chevron-up"></i>
+    </button>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lightgallery@2.7.0/lightgallery.min.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap" async defer></script>
+    <script>
+        // Initialize gallery
+        lightGallery(document.getElementById('campusGallery'));
+
+        // Initialize map
+        function initMap() {
+            const campus = { lat: 40.7128, lng: -74.0060 };
+            const map = new google.maps.Map(document.getElementById("campusMap"), {
+                zoom: 15,
+                center: campus,
+            });
+            new google.maps.Marker({ position: campus, map });
+        }
+
+        // Initialize components
+        document.addEventListener('DOMContentLoaded', () => {
+            // Animate stats counters
+            const counters = document.querySelectorAll('[data-counter]');
+            counters.forEach(counter => {
+                const target = +counter.getAttribute('data-counter');
+                const animate = () => {
+                    const current = +counter.innerText;
+                    if (current < target) {
+                        counter.innerText = Math.ceil(current + (target / 200));
+                        setTimeout(animate, 20);
+                    }
+                }
+                animate();
+            });
+
+            // Initialize tooltips
+            const tooltips = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+            [...tooltips].forEach(tooltip => new bootstrap.Tooltip(tooltip));
+
+            // Back to top button
+            const backToTop = document.querySelector('.btn-back-top');
+            window.addEventListener('scroll', () => {
+                backToTop.style.display = window.scrollY > 500 ? 'block' : 'none';
+            });
+            backToTop.addEventListener('click', () => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        });
+
+        // Enhanced Scroll to Top Functionality
+        const scrollButton = document.querySelector('.btn-back-top');
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                scrollButton.classList.add('show');
+            } else {
+                scrollButton.classList.remove('show');
+            }
+        });
+
+        scrollButton.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Initialize Tooltips
+        const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+        [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl));
+
+        // Animate Elements on Scroll
+        const animateOnScroll = () => {
+            const elements = document.querySelectorAll('.animate-on-scroll');
+
+            elements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const elementBottom = element.getBoundingClientRect().bottom;
+
+                if (elementTop < window.innerHeight && elementBottom > 0) {
+                    element.classList.add('animated');
+                }
+            });
+        };
+
+        window.addEventListener('scroll', animateOnScroll);
+        animateOnScroll(); // Initial check
+
+        // Initialize Google Maps
+        function initMap() {
+            // Add custom map styling here
+        }
+
+        // Initialize 360 Tour
+        const panorama = new google.maps.StreetViewPanorama(
+            document.getElementById('virtualTour'), {
+            position: { lat: 40.7128, lng: -74.0060 },
+            pov: { heading: 165, pitch: 0 },
+            zoom: 1
+        });
+    </script>
+    </script>
+</body>
+
+</html>

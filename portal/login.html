@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premier University - Login</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <style>
+        .login-section {
+            background: linear-gradient(rgba(0, 0, 0, 0.5)), url('../img/dom-fou-YRMWVcdyhmI-unsplash.jpg') center/cover fixed;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .login-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.4);
+            z-index: 0;
+        }
+
+        .login-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            position: relative;
+            z-index: 1;
+            backdrop-filter: blur(5px);
+        }
+
+        .form-control:focus {
+            box-shadow: none;
+            border-color: #1e3c72;
+        }
+
+        .forgot-password {
+            color: #1e3c72;
+            text-decoration: none;
+        }
+
+        .forgot-password:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+    <section class="login-section">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-6 col-lg-5">
+                    <div class="login-card p-5">
+                        <div class="text-center mb-5">
+                            <img src="../img/logo.png" alt="University Logo" width="216" class="mb-3">
+                            <h2 class="mb-1">Student Portal</h2>
+                            <p class="text-muted">Sign in to continue</p>
+                        </div>
+
+                        <form id="loginForm" onsubmit="return validateLogin(event)">
+                            <div class="mb-4">
+                                <label class="form-label">Student ID</label>
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="bi bi-person-badge"></i></span>
+                                    <input type="text" class="form-control" id="studentId"
+                                        placeholder="Enter Student ID" required>
+                                </div>
+                            </div>
+
+                            <div class="mb-4">
+                                <label class="form-label">Password</label>
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="bi bi-lock"></i></span>
+                                    <input type="password" class="form-control" id="password"
+                                        placeholder="Enter Password" required>
+                                    <button class="btn btn-outline-secondary" type="button" id="togglePassword" tabindex="-1" aria-label="Toggle password visibility">
+                                        <i class="bi bi-eye"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="mb-4 d-flex justify-content-between align-items-center">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="rememberMe">
+                                    <label class="form-check-label" for="rememberMe">Remember me</label>
+                                </div>
+                                <a href="../portal/forgot-password.html" class="forgot-password">Forgot Password?</a>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary w-100 py-2">Sign In</button>
+                        </form>
+
+                        <!-- Loader element -->
+                        <div id="loader" class="d-none position-fixed top-50 start-50 translate-middle text-center p-4 rounded shadow" style="z-index: 1055; background-color: rgba(255, 255, 255, 0.3); backdrop-filter: blur(5px);">
+                            <div class="spinner-border text-primary" role="status" style="width: 3rem; height: 3rem;">
+                                <span class="visually-hidden">Loading...</span>
+                            </div>
+                            <p class="mt-2 mb-0 fs-5 text-dark fw-semibold">Logging in, please wait...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Success Modal -->
+    <div class="modal fade" id="successModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body text-center p-5">
+                    <div class="mb-3">
+                        <i class="bi bi-check-circle-fill text-success fs-1"></i>
+                    </div>
+                    <h4>Login Successful!</h4>
+                    <p>Redirecting to dashboard...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Error Modal -->
+    <div class="modal fade" id="errorModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body text-center p-5">
+                    <div class="mb-3">
+                        <i class="bi bi-x-circle-fill text-danger fs-1"></i>
+                    </div>
+                    <h4>Login Failed</h4>
+                    <p>Invalid Student ID or Password</p>
+                    <button class="btn btn-secondary" data-bs-dismiss="modal">Try Again</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Generated Student Credentials (20 pairs)
+        const validCredentials = [
+            { id: "PU2023001", password: "St@rfish#01" },
+            { id: "PU2023002", password: "M@ng0Tr33!02" },
+            { id: "PU2023003", password: "Blu3Sky$03" },
+            { id: "PU2023004", password: "S3cur3P@ss04" },
+            { id: "PU2023005", password: "G0ldenSun!05" },
+            { id: "PU2023006", password: "P@perPlane06" },
+            { id: "PU2023007", password: "Silv3rMoon#07" },
+            { id: "PU2023008", password: "R@inbow$08" },
+            { id: "PU2023009", password: "F1reDr@gon09" },
+            { id: "PU2023010", password: "Ic3B3rg!10" },
+            { id: "PU2023011", password: "S@ndstorm11" },
+            { id: "PU2023012", password: "C0sm1cW@ve12" },
+            { id: "PU2023013", password: "ThunderB0lt#13" },
+            { id: "PU2023014", password: "Oc3anV!be14" },
+            { id: "PU2023015", password: "M1dn1ght$15" },
+            { id: "PU2023016", password: "D1am0ndGlow16" },
+            { id: "PU2023017", password: "Ecl1pse@17" },
+            { id: "PU2023018", password: "V3lv3tSk18" },
+            { id: "PU2023019", password: "Qu@ntumL3ap19" },
+            { id: "PU2023020", password: "N3bulaSt@r20" }
+        ];
+
+        // Handle Remember Me functionality
+        window.addEventListener('load', () => {
+            const rememberedId = localStorage.getItem('rememberedStudentId');
+            if (rememberedId) {
+                document.getElementById('studentId').value = rememberedId;
+                document.getElementById('rememberMe').checked = true;
+            }
+        });
+
+        function validateLogin(event) {
+            event.preventDefault();
+
+            const studentId = document.getElementById('studentId').value;
+            const password = document.getElementById('password').value;
+            const rememberMe = document.getElementById('rememberMe').checked;
+
+            // Check credentials
+            const isValid = validCredentials.some(cred =>
+                cred.id === studentId && cred.password === password
+            );
+
+            if (isValid) {
+                // Handle Remember Me
+                if (rememberMe) {
+                    localStorage.setItem('rememberedStudentId', studentId);
+                } else {
+                    localStorage.removeItem('rememberedStudentId');
+                }
+
+                // Show success modal
+                const successModal = new bootstrap.Modal(document.getElementById('successModal'));
+                successModal.show();
+
+                // Show loader animation in front of success modal
+                document.getElementById('loader').classList.remove('d-none');
+
+                // Hide the login form
+                document.getElementById('loginForm').classList.add('d-none');
+
+                // Hide the success modal after showing loader
+                setTimeout(() => {
+                    successModal.hide();
+                }, 500);
+
+                // Redirect after 3 seconds + loader display
+                setTimeout(() => {
+                    window.location.href = 'dashboard.html';
+                }, 3000);
+            } else {
+                // Show error modal
+                const errorModal = new bootstrap.Modal(document.getElementById('errorModal'));
+                errorModal.show();
+            }
+
+            return false;
+        }
+
+        // Toggle password visibility
+        document.getElementById('togglePassword').addEventListener('click', function () {
+            const passwordInput = document.getElementById('password');
+            const icon = this.querySelector('i');
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                icon.classList.remove('bi-eye');
+                icon.classList.add('bi-eye-slash');
+            } else {
+                passwordInput.type = 'password';
+                icon.classList.remove('bi-eye-slash');
+                icon.classList.add('bi-eye');
+            }
+        });
+    </script>
+</body>
+
+</html>

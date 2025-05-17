@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Dashboard | Premier University</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/chart.js@3.7.0/dist/chart.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #002147;
+            --secondary-color: #f8f9fa;
+            --accent-color: #ffd700;
+            --success-color: #28a745;
+            --info-color: #17a2b8;
+            --warning-color: #ffc107;
+            --danger-color: #dc3545;
+        }
+
+        .sidebar {
+            background: var(--primary-color);
+            min-height: 100vh;
+            box-shadow: 3px 0 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-link {
+            color: rgba(255, 255, 255, 0.8) !important;
+            transition: all 0.3s ease;
+            border-radius: 8px;
+            margin: 4px 12px;
+            padding: 12px 20px !important;
+        }
+
+        .nav-link.active {
+            background: linear-gradient(45deg, var(--accent-color), #ffc107);
+            color: var(--primary-color) !important;
+            font-weight: 500;
+            border-left: 0;
+        }
+
+        .nav-link:hover:not(.active) {
+            background: rgba(255, 255, 255, 0.05);
+            transform: translateX(4px);
+        }
+
+        .card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+        }
+
+        .dashboard-header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, var(--primary-color), #003366);
+            color: white;
+            border-radius: 15px;
+            overflow: hidden;
+        }
+
+        .calendar-day {
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border-radius: 8px;
+        }
+
+        .calendar-day:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 280px;
+                transform: translateX(-100%);
+                transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            }
+
+            .sidebar.active {
+                transform: translateX(0);
+            }
+
+            .main-content {
+                margin-left: 0 !important;
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-light">
+    <!-- Mobile Header -->
+    <nav class="navbar navbar-dark bg-primary d-lg-none">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <img src="../img/logo.png" alt="Logo" height="30" class="me-2">
+            </a>
+            <button class="navbar-toggler" type="button" id="mobileMenuToggle">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <nav class="col-lg-2 sidebar fixed-top vh-100">
+                <div class="sidebar-sticky pt-4">
+                    <div class="text-center mb-4">
+                        <img src="../img/logo.png" alt="University Logo" class="img-fluid"
+                            style="max-width: 198px;">
+                        <!-- <img src="../img/logo.png" alt="University Logo" class="img-fluid" style="max-width: 160px; background-color: #002147; padding: 5px; border-radius: 8px;"> -->
+                    </div>
+                    <ul class="nav flex-column">
+                        <!-- <li class="nav-item">
+                            <a class="nav-link active" href="portal.html">
+                                <i class="bi bi-speedometer2 me-2"></i> Dashboard
+                            </a>
+                        </li> -->
+                        <li class="nav-item">
+                            <a class="nav-link active" href="dashboard.html">
+                                <i class="bi bi-speedometer2 me-2"></i> Dashboard
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="my-courses.html">
+                                <i class="bi bi-journal-bookmark me-2"></i> My Courses
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="grades.html">
+                                <i class="bi bi-clipboard-data me-2"></i> Grades
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="timetable.html">
+                                <i class="bi bi-calendar-event me-2"></i> Timetable
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="payments.html">
+                                <i class="bi bi-credit-card me-2"></i> Payments
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+
+            <!-- Add skip navigation link -->
+            <a href="#main-content" class="skip-link">Skip to main content</a>
+
+            <!-- Main Content -->
+            <main class="col-lg-10 ms-sm-auto px-lg-4 main-content">
+                <!-- Header -->
+                <div class="dashboard-header d-flex justify-content-between flex-wrap align-items-center pt-4 pb-3 px-4 mt-3"
+                    style="position: relative; margin-top: 1.5rem;">
+                    <h1 class="h3 mb-0">Student Dashboard</h1>
+                    <div class="d-flex align-items-center">
+                        <div class="dropdown" style="position: relative;">
+                            <button class="btn btn-outline-primary rounded-pill" type="button" data-bs-toggle="dropdown"
+                                aria-expanded="false">
+                                <i class="bi bi-person-circle me-2"></i>John Doe
+                                <i class="bi bi-chevron-down ms-2"></i>
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-end"
+                                style="z-index: 1300 !important; position: absolute; top: 100%; left: auto; right: 0;">
+                                <li><a class="dropdown-item" href="profile.html">
+                                        <i class="bi bi-person me-2"></i>Profile</a></li>
+                                <li><a class="dropdown-item" href="settings.html">
+                                        <i class="bi bi-gear me-2"></i>Settings</a></li>
+                                <li><a class="dropdown-item d-flex justify-content-between align-items-center"
+                                        href="notifications.html" id="notificationsMenuItem">
+                                        <span><i class="bi bi-bell me-2"></i>Notifications</span>
+                                        <span class="badge bg-danger rounded-pill" id="notificationBadge">2</span>
+                                    </a></li>
+                                <li><a class="dropdown-item" href="help.html">
+                                        <i class="bi bi-question-circle me-2"></i>Help</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item text-danger" href="login.html">
+                                        <i class="bi bi-box-arrow-left me-2"></i>Logout</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Dashboard Content -->
+                <div class="container-fluid pt-4">
+                    <div class="row g-4">
+
+                        <div class="notification-badge" data-count="3">
+                            <i class="bi bi-bell"></i>
+                        </div>
+                        <!-- Quick Stats -->
+                        <div class="col-12">
+                            <div class="row g-3">
+                                <div class="col-md-6 col-xl-3">
+                                    <div class="card stat-card bg-primary text-white">
+                                        <div class="card-body">
+                                            <div class="d-flex align-items-center">
+                                                <div class="flex-grow-1">
+                                                    <h6 class="text-uppercase mb-1">Current GPA</h6>
+                                                    <h2 class="mb-0">3.75</h2>
+                                                </div>
+                                                <i class="bi bi-award fs-1"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Add similar stat cards -->
+                            </div>
+                        </div>
+
+                        <!-- Main Content -->
+                        <div class="col-xl-8">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5 class="mb-0"><i class="bi bi-calendar3 me-2"></i>Academic Schedule</h5>
+                                </div>
+                                <div class="card-body">
+                                    <div id="calendar"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Right Sidebar -->
+                        <div class="col-xl-4">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5 class="mb-0"><i class="bi bi-lightning-charge me-2"></i>Quick Actions</h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="d-grid gap-2">
+                                        <button class="btn btn-outline-primary text-start">
+                                            <i class="bi bi-upload me-2"></i>Submit Assignment
+                                        </button>
+                                        <button class="btn btn-outline-success text-start">
+                                            <i class="bi bi-calendar-plus me-2"></i>Add Event
+                                        </button>
+                                        <button class="btn btn-outline-info text-start">
+                                            <i class="bi bi-journal-text me-2"></i>View Grades
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Academic Progress -->
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-header d-flex justify-content-between">
+                                    <h5>Academic Progress</h5>
+                                    <div class="dropdown">
+                                        <button class="btn btn-link" data-bs-toggle="dropdown">
+                                            <i class="bi bi-three-dots"></i>
+                                        </button>
+                                        <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item" href="#">View Details</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <div class="progress-wrapper">
+                                        <div class="d-flex justify-content-between mb-3">
+                                            <span>Degree Completion</span>
+                                            <span>65%</span>
+                                        </div>
+                                        <div class="progress" style="height: 12px;">
+                                            <div class="progress-bar bg-success" style="width: 65%"></div>
+                                        </div>
+                                    </div>
+                                    <div class="mt-4">
+                                        <h6>Credit Summary</h6>
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <div class="text-muted small">Completed</div>
+                                                <h4>98</h4>
+                                                <span class="text-success small">+12 this term</span>
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="text-muted small">Remaining</div>
+                                                <h4>42</h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Live Announcements -->
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5>University Announcements</h5>
+                                </div>
+                                <div class="card-body announcement-feed">
+                                    <div class="list-group">
+                                        <a href="#" class="list-group-item list-group-item-action">
+                                            <div class="d-flex justify-content-between">
+                                                <div>
+                                                    <h6>Career Fair 2024 Registration Open</h6>
+                                                    <p class="small mb-0">Meet top employers on March 15th</p>
+                                                </div>
+                                                <span class="badge bg-primary">New</span>
+                                            </div>
+                                        </a>
+                                        <!-- More announcements -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- To-Do List -->
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5>Upcoming Deadlines</h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="todo-list">
+                                        <div class="todo-item">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox">
+                                                <label class="form-check-label">
+                                                    <span>MATH 301 Assignment 3</span>
+                                                    <small class="text-muted">Due: Feb 28</small>
+                                                </label>
+                                            </div>
+                                            <span class="badge bg-warning">High Priority</span>
+                                        </div>
+                                        <!-- More todo items -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card ai-assistant">
+                            <div class="card-header">
+                                <h5><i class="bi bi-robot"></i> Academic Assistant</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="ai-chat">
+                                    <div class="ai-message">How can I help you today?</div>
+                                    <div class="quick-prompts">
+                                        <button class="btn btn-sm btn-outline-primary">Plan my week</button>
+                                        <button class="btn btn-sm btn-outline-primary">Find resources</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card wellness-card">
+                            <div class="card-body text-center">
+                                <h5><i class="bi bi-heart-pulse"></i> Wellness Check</h5>
+                                <div class="stress-meter">
+                                    <div class="stress-level" style="width: 40%"></div>
+                                </div>
+                                <button class="btn btn-link">Access Counseling Services</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Login
+        document.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.has('login')) {
+                const statusMessage = document.createElement('div');
+                statusMessage.className = 'toast align-items-center text-white bg-success border-0 position-fixed top-0 end-0 m-3';
+                statusMessage.innerHTML = `
+            <div class="d-flex">
+                <div class="toast-body">
+                    Login successful!
+                </div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+            </div>
+        `;
+
+                document.body.appendChild(statusMessage);
+                new bootstrap.Toast(statusMessage).show();
+
+                // Clean URL
+                window.history.replaceState({}, document.title, window.location.pathname);
+            }
+        });
+
+        // Mobile Menu Toggle
+        document.getElementById('mobileMenuToggle').addEventListener('click', () => {
+            document.querySelector('.sidebar').classList.toggle('active');
+        });
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', (e) => {
+            const sidebar = document.querySelector('.sidebar');
+            if (window.innerWidth < 992 && !e.target.closest('.sidebar') && !e.target.closest('#mobileMenuToggle')) {
+                sidebar.classList.remove('active');
+            }
+        });
+
+        // Initialize calendar
+        function initializeCalendar() {
+            // Calendar implementation using a library like FullCalendar
+        }
+        initializeCalendar();
+
+        // Add hover tooltips
+        const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+        const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+
+        // Dynamic content loading
+        document.querySelectorAll('.async-load').forEach(element => {
+            element.addEventListener('click', async (e) => {
+                const content = await fetchContent(e.target.dataset.src);
+                element.parentElement.innerHTML = content;
+            });
+        });
+    </script>
+</body>
+
+</html>

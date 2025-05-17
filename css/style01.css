@@ -1,0 +1,256 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Poppins&family=Raleway&display=swap');
+
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css");
+
+:root {
+    --pri-color: #7c6a46;
+}
+
+/* font family starts here */
+.dancing-script {
+    font-family: 'Dancing Script', cursive;
+}
+
+.poppins-script {
+    font-family: 'Poppins', sans-serif;
+}
+
+.raleway-script {
+    font-family: 'Raleway', sans-serif;
+}
+/* font family ends here */
+.text-purple {
+    color: purple;
+}
+
+/* header {
+    position: relative; */
+    /* height: 500px; */
+/* } */ */
+
+.navbar {
+    height: 80px;
+    /* justify-content: right; */
+}
+
+/* .carousel-item {
+    height: 750px;
+} */
+
+.carousel-item {
+    position: relative;
+    height: 100vh;
+}
+.carousel-item img, .carousel-item video {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+}
+.carousel-caption {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    text-align: center;
+    width: 100%;
+    color: #0059ff;
+}
+
+.btn-primary {
+    background-color: #001d25 !important;
+    border-color: #76e1ff;
+}
+
+.btn-primary:hover {
+    background-color: #003f92 !important;
+    border-color: #ffffff;
+}
+
+.testimonial-carousel-control-prev {
+    padding-left: -10vh; 
+    /* background-color: black; */
+    background-color: #001d25;
+}
+
+.testimonial-carousel-control-next {
+    padding-right: -10vh; 
+    /* background-color: black; */
+    background-color: #001d25;
+}
+
+.star {
+    color: gold;
+}
+
+/* .bg-purple {
+    color: purple;
+}
+
+.text-bg-purple {
+    background-color: purple;
+    color: #fff;
+}
+
+.text-justify {
+    text-align: justify
+}
+
+.vh-50 {
+    height: 50vh;
+}
+
+.bg-image {
+    background-image: url('../img/Man-holding-a-child-while-taking-a-walk.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+.bg-image1 {
+    background-image: url('../img/pexels-ketut-subiyanto-4719948.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+.btn-primary {
+    background-color: #7C6A46 !important;
+    border-color: #7C6A46;
+}
+
+.btn-primary:hover {
+    background-color: #352C1B !important;
+    border-color: #7C6A46;
+}
+
+.btn-square {
+    width: 50px;
+    height: 50px;
+}
+
+.btn-success {
+    background-color: #00A699;
+    border-color: #00A699;
+}
+
+.btn-success:hover {
+    background-color: #81f7ed;
+    border-color: #81f7ed;
+}
+
+.text-primary {
+    color: #7C6A46 !important;
+}
+
+.img-hero {
+    max-width: 100%;
+    height: 80vh;
+  }
+
+::placeholder {
+    color: #1c1c1c;
+}
+
+.d-flex label {
+    font-weight: bold;
+}
+
+header {
+    position: relative; */
+    /* height: 500px; */
+/* } */
+
+/* .mtn-3 {
+    position: absolute; */
+    /* margin-top: -7rem; */
+    /* bottom: 0;
+    top: 77%;
+    z-index: 999;
+    left: 0;
+    right: 0;
+    margin: auto;
+} */
+
+/* .bg-light { */
+    /* background-color: #fafafa !important; */
+    /* color: #7C6A46 !important;     */
+    /* color: var(--pri-color) !important;  */
+    /* transition: 0.5s;  */
+/* } */
+
+/* .bg-light:hover { */
+    /* background-color: #7C6A46 !important; */
+    /* color: #fff !important; */
+/* } */
+
+/* .btn-absolute { */
+    /* position: absolute; */
+    /* top: 30px; */
+    /* right: 30px; */
+/* } */
+
+/* .btn-absolute {
+    position: absolute;
+    top: 10;
+    right: 10;
+    margin-top: 20px;
+    margin-right: 20px;
+} */
+
+/* .title {
+    color: #fff;
+}
+
+.title h1:after {
+    content: '';
+    height: 2px;
+    width: 60px;
+    position: absolute;
+    background: #fff;
+} */
+
+/* .underline { */
+    /* position: relative; */
+    /* cursor: pointer; */
+/* } */
+
+/* .underline:after { */
+    /* content: ''; */
+    /* height: 2px; */
+    /* width: 10%; */
+    /* position: absolute; */
+    /* background: #fff; */
+    /* bottom: -4px; */
+    /* left: 0; */
+    /* right: 0; */
+    /* margin: auto; */
+    /* transition: .5s; */
+/* } */
+
+/* .underline:hover:after { */
+    /* width: 15%; */
+    /* cursor: pointer; */
+/* } */
+
+/* .bg-lux { */
+    /* background-image: url(../img/pexels-pixabay-279805.jpg); */
+    /* background-repeat: no-repeat; */
+    /* background-position: center; */
+    /* background-size: cover; */
+    
+/* } */
+
+/* .filter { */
+    /* background-color: rgba(124, 106, 70, 0.5); */
+/* } */
+
+/* .mt-6 { */
+    /* margin-top: 4rem; */
+/* } */
+
+/* .ms-l { */
+    /* margin-left: 0.8rem; */
+/* } */
+
+/* .bg-primary { */
+    /* background-color: var(--pri-color) !important; */
+/* } */

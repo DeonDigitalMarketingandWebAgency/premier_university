@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Welcome to Premier University - Transforming Education Since 1990">
+    <title>Premier University - Home</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link href="style.css" rel="stylesheet">
+    <style>
+        .contact-hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('img/pexels-belle-co-99483-1000445.jpg') center/cover;
+            height: 60vh;
+            margin-top: 56px;
+        }
+
+        .contact-form-section {
+            background: linear-gradient(rgba(255, 255, 255, 0.9), url('img/dom-fou-YRMWVcdyhmI-unsplash.jpg'));
+            padding: 3rem;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .chat-widget {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 1000;
+        }
+
+        .chat-button {
+            padding: 12px 24px;
+            transition: all 0.3s ease;
+            animation: pulse 2s infinite;
+            position: relative;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.05);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .chat-box {
+            width: 350px;
+            height: 500px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .chat-header {
+            border-radius: 15px 15px 0 0;
+        }
+
+        .chat-body {
+            flex: 1;
+            overflow-y: auto;
+            background: #f8f9fa;
+        }
+
+        .chat-messages {
+            min-height: calc(100% - 60px);
+        }
+
+        .message {
+            margin-bottom: 15px;
+            padding: 10px 15px;
+            border-radius: 15px;
+            max-width: 80%;
+        }
+
+        .message-user {
+            background: #0d6efd;
+            color: white;
+            margin-left: auto;
+        }
+
+        .message-agent {
+            background: #e9ecef;
+            color: #212529;
+            margin-right: auto;
+        }
+
+        .message-system {
+            font-size: 0.8em;
+            color: #6c757d;
+        }
+
+        .typing-indicator {
+            padding: 10px 15px;
+            display: none;
+        }
+
+        .campus-marker {
+            background: #0d6efd;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 25px;
+            font-size: 0.9rem;
+        }
+
+        .contact-info-card {
+            background: rgba(255, 255, 255, 0.98);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+            padding: 2rem;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            transition: all 0.3s ease;
+            min-height: 280px;
+            /* Fixed minimum height */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        .contact-info-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .contact-info-card i {
+            font-size: 2.25rem;
+            margin-bottom: 1.5rem;
+            color: #0d6efd;
+            background: rgba(13, 110, 253, 0.1);
+            padding: 1rem;
+            border-radius: 50%;
+            width: 70px;
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .contact-info-card h5 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #2d3748;
+        }
+
+        .contact-info-card p {
+            margin: 0;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: #4a5568;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            width: 100%;
+        }
+
+        .contact-info-card .text-muted {
+            font-size: 0.85rem;
+            margin-top: 1rem;
+            color: #718096 !important;
+        }
+
+        @media (max-width: 768px) {
+            .contact-info-card {
+                min-height: 240px;
+                padding: 1.5rem;
+            }
+
+            .contact-info-card i {
+                font-size: 1.75rem;
+                width: 60px;
+                height: 60px;
+            }
+        }
+
+        .text-purple {
+            color: #6f42c1;
+        }
+
+        .hover-shadow {
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .hover-shadow:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .15) !important;
+        }
+
+        .contact-details p {
+            transition: color 0.2s;
+        }
+
+        .contact-details:hover p {
+            color: #333 !important;
+        }
+
+        .toast {
+            animation: slideIn 0.3s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+            }
+
+            to {
+                transform: translateX(0);
+            }
+        }
+
+        .toast {
+            animation: slideIn 0.3s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+            }
+
+            to {
+                transform: translateX(0);
+            }
+        }
+
+        .timer-display {
+            margin-right: 15px;
+            font-weight: 500;
+        }
+
+        .list-unstyled>li>a {
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container">
+            <a href="index.html">
+                <img src="img/logo.png" alt="University Logo" width="200" height="60" style="background-color: #9eb1bd7c; padding: 5px; border-radius: 8px;"
+                class="d-inline-block align-text-top me-2"></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto" style="text-decoration: none;">
+                    <!-- <li class="nav-item"><a class="nav-link active" href="#">Home</a></li> -->
+                    <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="admissions.html">Admissions</a></li>
+                    <li class="nav-item"><a class="nav-link" href="academics.html">Academics</a></li>
+                    <li class="nav-item"><a class="nav-link" href="news.html">News & Events</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                    <li class="nav-item"><a class="nav-link" href="portal/login.html">Sign-in</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="contact-hero">
+        <div class="container h-100 d-flex align-items-center">
+            <div class="text-white text-center">
+                <h1 class="display-3">Connect With Us</h1>
+                <p class="lead">Your Gateway to Premier University Support</p>
+            </div>
+        </div>
+    </header>
+
+    <!-- Contact Form Section -->
+    <section class="py-5">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="contact-form-section">
+                        <h2 class="text-center mb-4">Send Us a Message</h2>
+                        <!-- Updated HTML Structure -->
+                        <div class="row g-4 py-4">
+                            <div class="col-md-4 d-flex">
+                                <div class="contact-info-card w-100 text-center">
+                                    <i class="bi bi-geo-alt"></i>
+                                    <h5>Main Campus Address</h5>
+                                    <p class="mb-0">123 University Road</p>
+                                    <p class="mb-0">City, State 12345</p>
+                                    <p class="text-muted mt-2">(Located in Academic District)</p>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4 d-flex">
+                                <div class="contact-info-card w-100 text-center">
+                                    <i class="bi bi-clock"></i>
+                                    <h5>Working Hours</h5>
+                                    <p class="mb-1">Mon-Fri: 8:00 AM - 6:00 PM</p>
+                                    <p class="mb-1">Saturday: 9:00 AM - 1:00 PM</p>
+                                    <p class="text-muted mt-2">Closed on public holidays</p>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4 d-flex">
+                                <div class="contact-info-card w-100 text-center">
+                                    <i class="bi bi-telephone"></i>
+                                    <h5>Contact Numbers</h5>
+                                    <p class="mb-1">Admissions: +1 (555) 123-4000</p>
+                                    <p class="mb-1">Emergency: +1 (555) 123-9111</p>
+                                    <p class="text-muted mt-2">24/7 emergency line</p>
+                                </div>
+                            </div>
+                        </div>
+                        <form id="contactForm" class="needs-validation" novalidate>
+                            <!-- Form fields same as before -->
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Name</label>
+                                <input type="text" class="form-control" id="name" required>
+                                <div class="invalid-feedback">
+                                    Please provide your name.
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Email</label>
+                                <input type="email" class="form-control" id="email" required>
+                                <div class="invalid-feedback">
+                                    Please provide a valid email.
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="department" class="form-label">Department</label>
+                                <select class="form-select" id="department" required>
+                                    <option value="">Select Department</option>
+                                    <option>Admissions</option>
+                                    <option>Academic</option>
+                                    <option>Student Services</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="message" class="form-label">Message</label>
+                                <textarea class="form-control" id="message" rows="5" required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Send Message</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="toast-container position-fixed bottom-0 end-0 p-3">
+        <div id="successToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header bg-success text-white">
+                <i class="bi bi-check-circle me-2"></i>
+                <strong class="me-auto">Success!</strong>
+                <small class="timer-display">5s</small>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast"></button>
+            </div>
+            <div class="toast-body">
+                Message sent successfully! Refreshing page in <span id="countdown">5</span> seconds...
+            </div>
+        </div>
+    </div>
+
+    <!-- Department Contacts Section -->
+    <section class="py-5" id="department-contacts">
+        <div class="container">
+            <h2 class="text-center mb-5">Department Contacts</h2>
+            <div class="row g-4">
+                <!-- Admissions -->
+                <div class="col-md-4">
+                    <div class="card h-100 hover-shadow">
+                        <div class="card-body text-center">
+                            <i class="bi bi-door-open fs-1 text-primary"></i>
+                            <h5 class="mt-3">Admissions Office</h5>
+                            <div class="contact-details mt-4">
+                                <p class="mb-1"><i class="bi bi-envelope me-2"></i>admissions@premieruni.edu</p>
+                                <p class="mb-1"><i class="bi bi-telephone me-2"></i>+1 (555) 123-4000</p>
+                                <p class="text-muted mt-2">Office Hours: Mon-Fri 8:00 AM - 6:00 PM</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Academic Affairs -->
+                <div class="col-md-4">
+                    <div class="card h-100 hover-shadow">
+                        <div class="card-body text-center">
+                            <i class="bi bi-journal-bookmark fs-1 text-success"></i>
+                            <h5 class="mt-3">Academic Affairs</h5>
+                            <div class="contact-details mt-4">
+                                <p class="mb-1"><i class="bi bi-envelope me-2"></i>academics@premieruni.edu</p>
+                                <p class="mb-1"><i class="bi bi-telephone me-2"></i>+1 (555) 123-4001</p>
+                                <p class="text-muted mt-2">Program Inquiries: Mon-Fri 9:00 AM - 5:00 PM</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Student Services -->
+                <div class="col-md-4">
+                    <div class="card h-100 hover-shadow">
+                        <div class="card-body text-center">
+                            <i class="bi bi-people fs-1 text-warning"></i>
+                            <h5 class="mt-3">Student Services</h5>
+                            <div class="contact-details mt-4">
+                                <p class="mb-1"><i class="bi bi-envelope me-2"></i>students@premieruni.edu</p>
+                                <p class="mb-1"><i class="bi bi-telephone me-2"></i>+1 (555) 123-4002</p>
+                                <p class="text-muted mt-2">Support Available: 24/7 Emergency Line</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Additional Departments -->
+                <!-- Financial Aid -->
+                <div class="col-md-4">
+                    <div class="card h-100 hover-shadow">
+                        <div class="card-body text-center">
+                            <i class="bi bi-cash-coin fs-1 text-info"></i>
+                            <h5 class="mt-3">Financial Aid</h5>
+                            <div class="contact-details mt-4">
+                                <p class="mb-1"><i class="bi bi-envelope me-2"></i>finaid@premieruni.edu</p>
+                                <p class="mb-1"><i class="bi bi-telephone me-2"></i>+1 (555) 123-4003</p>
+                                <p class="text-muted mt-2">Counseling Hours: Mon-Fri 10:00 AM - 4:00 PM</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- International Office -->
+                <div class="col-md-4">
+                    <div class="card h-100 hover-shadow">
+                        <div class="card-body text-center">
+                            <i class="bi bi-globe fs-1 text-danger"></i>
+                            <h5 class="mt-3">International Office</h5>
+                            <div class="contact-details mt-4">
+                                <p class="mb-1"><i class="bi bi-envelope me-2"></i>international@premieruni.edu</p>
+                                <p class="mb-1"><i class="bi bi-telephone me-2"></i>+1 (555) 123-4004</p>
+                                <p class="text-muted mt-2">Visa Support: Mon-Fri 9:00 AM - 5:00 PM</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Research & Development -->
+                <div class="col-md-4">
+                    <div class="card h-100 hover-shadow">
+                        <div class="card-body text-center">
+                            <i class="bi bi-flask fs-1 text-purple"></i>
+                            <h5 class="mt-3">Research & Development</h5>
+                            <div class="contact-details mt-4">
+                                <p class="mb-1"><i class="bi bi-envelope me-2"></i>research@premieruni.edu</p>
+                                <p class="mb-1"><i class="bi bi-telephone me-2"></i>+1 (555) 123-4005</p>
+                                <p class="text-muted mt-2">Grant Inquiries: Tue-Thu 10:00 AM - 3:00 PM</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Additional Contact Information -->
+            <div class="row mt-5">
+                <div class="col-12 text-center">
+                    <div class="alert alert-info">
+                        <h5>General Inquiries</h5>
+                        <p class="mb-0">
+                            <i class="bi bi-telephone me-2"></i>Main Switchboard: +1 (555) 123-4567<br>
+                            <i class="bi bi-envelope me-2"></i>General Email: info@premieruni.edu
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Campus Maps Section -->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <h2 class="text-center mb-5">Our Global Campuses</h2>
+            <div class="row g-4">
+                <div class="col-12">
+                    <div id="multiCampusMap" style="height: 500px; border-radius: 15px;"></div>
+                </div>
+                <div class="col-md-4">
+                    <div class="campus-info-card">
+                        <h5>New York Campus</h5>
+                        <p>123 Manhattan Street<br>New York, NY 10001</p>
+                    </div>
+                </div>
+                <!-- Repeat for other campuses -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Live Chat Widget -->
+    <div class="chat-widget">
+        <button class="btn btn-primary rounded-pill shadow-lg chat-button" id="chatButton">
+            <i class="bi bi-chat-dots me-2"></i> Live Chat
+            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+                id="unreadCount">0</span>
+        </button>
+
+        <div class="chat-box d-none" id="chatBox">
+            <div class="chat-header bg-primary text-white p-3 d-flex justify-content-between align-items-center">
+                <div>
+                    <h6 class="mb-0">Premier University Support</h6>
+                    <small id="agentStatus" class="text-warning">Connecting...</small>
+                </div>
+                <div>
+                    <button class="btn btn-sm btn-light me-2" id="minimizeChat"><i class="bi bi-dash"></i></button>
+                    <button class="btn btn-close btn-close-white" id="closeChat"></button>
+                </div>
+            </div>
+
+            <div class="chat-body p-3">
+                <div class="chat-messages mb-3" id="chatMessages">
+                    <div class="message-system text-center mb-3">
+                        <small class="text-muted">Chat started at <span id="chatTime"></span></small>
+                    </div>
+                </div>
+
+                <div class="chat-input">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Type your message..." id="chatInput">
+                        <button class="btn btn-primary" id="sendMessage">
+                            <i class="bi bi-send"></i>
+                        </button>
+                    </div>
+                    <small class="text-muted mt-1 d-block">Press Enter to send</small>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Enhanced Footer -->
+    <footer class="bg-dark text-white py-4 mt-auto">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-md-3">
+                    <h5>Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-white">Admissions</a></li>
+                        <li><a href="#" class="text-white">Academic Calendar</a></li>
+                        <li><a href="#" class="text-white">Student Portal</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h5>Resources</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-white">Library</a></li>
+                        <li><a href="#" class="text-white">Career Services</a></li>
+                        <li><a href="#" class="text-white">Alumni Network</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h5>Legal</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-white">Privacy Policy</a></li>
+                        <li><a href="#" class="text-white">Terms of Service</a></li>
+                        <li><a href="#" class="text-white">Accessibility</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h5>Connect</h5>
+                    <div class="social-links">
+                        <a href="#" class="text-white me-2"><i class="bi bi-facebook"></i></a>
+                        <a href="#" class="text-white me-2"><i class="bi bi-twitter-x"></i></a>
+                        <a href="#" class="text-white me-2"><i class="bi bi-linkedin"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-4 pt-3 border-top">
+                <p class="mb-0">&copy; 2023 Premier University. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="live-chat.js"></script>
+    <script src="scripts.js"></script>
+    <script>
+        // Enhanced Form Validation
+        const form = document.getElementById('contactForm');
+        const departmentSelect = document.getElementById('department');
+        const submitBtn = document.querySelector('#contactForm button[type="submit"]');
+
+        departmentSelect.addEventListener('change', function () {
+            this.setAttribute('disabled', 'true');
+        });
+
+        form.addEventListener('input', () => {
+            submitBtn.disabled = !form.checkValidity();
+        });
+
+        // Enhanced Chat Functionality
+        const chatButton = document.getElementById('chatButton');
+        const chatBox = document.getElementById('chatBox');
+
+        chatButton.addEventListener('click', () => {
+            chatBox.classList.toggle('d-none');
+            chatButton.classList.remove('pulse');
+        });
+
+        // Multi-campus Map
+        function initCampusMap() {
+            const campuses = [
+                { lat: 40.7128, lng: -74.0060, name: "New York" },
+                { lat: 51.5074, lng: -0.1278, name: "London" },
+                // Add 4 more campuses
+            ];
+
+            const map = new google.maps.Map(document.getElementById("multiCampusMap"), {
+                zoom: 2,
+                center: { lat: 20, lng: 0 }
+            });
+
+            campuses.forEach(campus => {
+                new google.maps.Marker({
+                    position: campus,
+                    map: map,
+                    title: campus.name
+                });
+            });
+        }
+
+        // Initialize maps when window loads
+        window.onload = initCampusMap;
+
+
+        // Add click-to-copy functionality
+        document.querySelectorAll('.contact-details').forEach(detail => {
+            detail.addEventListener('click', function (e) {
+                const text = this.innerText.replace(/Office Hours:.*/, '').trim();
+                navigator.clipboard.writeText(text).then(() => {
+                    const toast = document.createElement('div');
+                    toast.className = 'toast bg-success text-white';
+                    toast.innerHTML = 'Contact info copied to clipboard!';
+                    document.body.appendChild(toast);
+                    setTimeout(() => toast.remove(), 2000);
+                });
+            });
+        });
+
+        document.getElementById('contactForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            let refreshTimer;
+            let countdownInterval;
+
+            if (this.checkValidity()) {
+                // Show success toast only if valid
+                const toastEl = document.getElementById('successToast');
+                const toast = new bootstrap.Toast(toastEl);
+                let seconds = 5;
+
+                // Update countdown display
+                const updateTimer = () => {
+                    document.getElementById('countdown').textContent = seconds;
+                    document.querySelector('.timer-display').textContent = `${seconds}s`;
+                    seconds--;
+                };
+
+                // Initial update
+                updateTimer();
+
+                // Start countdown
+                countdownInterval = setInterval(() => {
+                    if (seconds >= 0) {
+                        updateTimer();
+                    }
+                }, 1000);
+
+                // Show toast
+                toast.show();
+
+                // Handle toast dismissal
+                toastEl.addEventListener('hidden.bs.toast', () => {
+                    clearInterval(countdownInterval);
+                    clearTimeout(refreshTimer);
+                });
+
+                // Set refresh timeout
+                refreshTimer = setTimeout(() => {
+                    window.location.reload();
+                }, 5000);
+
+                // Reset form
+                this.reset();
+                this.classList.remove('was-validated');
+            } else {
+                // Show validation errors without showing success toast
+                this.classList.add('was-validated');
+            }
+        });
+    </script>
+</body>
+
+</html>

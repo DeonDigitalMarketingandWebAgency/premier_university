@@ -1,0 +1,76 @@
+http://localhost:3000
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Modify and update the following:
+
+ 1. The entire/whole website (project) to make it more professional, modern, responsive, dynamic, Seo user & mobile friendly
+
+2. Apply the typing animation of the "Fast & Secure" to the entire Fast & Secure Digital Services at Your Fingertips" text. Reduce the typing speed of the typing animation
+
+3. Link the Login button of the navigation bar to the earlier created Login page
+
+4. Link the "Dashboard" on the navigation to the Login page, so users are directed to the dahboard after successful login
+
+
+In the Dashboard:
+5. in the navigation bar of the dashboard, create a modern, professional, responsive, and dynamic "Profile" page and properly link the created profile page to the profile button on the dashboard
+
+6. Remove the "Wallet" next to the "Profile" in the navigation bar
+
+7. Remove the "Dashboard", "Overview", "Wallet", "Profile" from the navigation
+
+Remove the navigation bar and its items/components
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Modify and update the following:
+
+ 1. The entire/whole website (project) to make it more professional, modern, responsive, dynamic, Seo user & mobile friendly
+
+2. Apply the typing animation of the "Fast & Secure" to the entire Fast & Secure Digital Services at Your Fingertips" text. Reduce the typing speed of the typing animation
+
+3. Link the Login button of the navigation bar to the earlier created Login page
+
+4. Link the "Dashboard" on the navigation to the Login page, so users are directed to the dahboard after successful login
+
+
+In the Dashboard:
+5. in the navigation bar of the dashboard, create a modern, professional, responsive, and dynamic "Profile" page and properly link the created profile page to the profile button on the dashboard
+
+6. Remove the navigation bar and its items/components leaving only the "Profile" button and "Logout"
+
+7. Move the "Profile" button and "Logout" to the right side next to the "Fund Wallet" 
+
+8. Group the "Profile" button and "Logout" into one drop-down menu, and add more relevant items/content to the drop-down menu
+
+9. Activate the Logout so when clicked the user is logged out their account
+
+10. Modify and update the dashboard that when the dashboard is ideal, inactive, domant for a set period of time the account automatically logs out

@@ -1,0 +1,1404 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Welcome to Premier University - Transforming Education Since 1990">
+    <title>Premier University - Home</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link href="style.css" rel="stylesheet">
+    <style>
+        /* Custom CSS */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1.5rem;
+            border-radius: 12px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+
+        /*  */
+        .bg-purple {
+            background-color: #6f42c1 !important;
+        }
+
+        .date-card {
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.2s;
+        }
+
+        .date-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .date-header {
+            padding: 1rem;
+            text-align: center;
+        }
+
+        .date-header .month {
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .date-header .day {
+            font-size: 2rem;
+            font-weight: bold;
+            line-height: 1;
+        }
+
+        .date-body {
+            padding: 1.5rem;
+            background: white;
+        }
+
+        .date-body h5 {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .date-body p {
+            font-size: 0.9rem;
+            color: #6c757d;
+            margin-bottom: 1rem;
+        }
+
+        /* Admissions Process */
+        .process-timeline {
+            position: relative;
+            padding-left: 30px;
+        }
+
+        .process-step {
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .step-indicator {
+            width: 50px;
+            height: 50px;
+            background: #fff;
+            border: 3px solid #0d6efd;
+            border-radius: 50%;
+            position: absolute;
+            left: -65px;
+            top: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .step-header {
+            cursor: pointer;
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: 8px;
+            margin-left: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .step-header:hover {
+            background: #e9ecef;
+        }
+
+        .step-title {
+            margin: 0;
+            font-size: 1.25rem;
+            color: #212529;
+        }
+
+        .step-content {
+            margin-left: 2rem;
+            margin-top: 1rem;
+        }
+
+        .criteria-card {
+            text-align: center;
+            padding: 1rem;
+        }
+
+        .timeline-steps {
+            display: flex;
+            justify-content: space-between;
+            padding: 1rem 0;
+        }
+
+        .timeline-steps .step {
+            flex: 1;
+            text-align: center;
+            position: relative;
+        }
+
+        @media (max-width: 768px) {
+            .process-timeline {
+                padding-left: 0;
+            }
+
+            .step-indicator {
+                position: static;
+                margin-bottom: 1rem;
+            }
+
+            .step-header {
+                margin-left: 0;
+            }
+        }
+
+        @keyframes pulse-border {
+            0% {
+                box-shadow: 0 0 0 0 rgba(13, 110, 253, 0.5);
+            }
+
+            100% {
+                box-shadow: 0 0 0 15px rgba(13, 110, 253, 0);
+            }
+        }
+
+        .highlight-button {
+            animation: pulse-border 1.5s infinite;
+            transform: scale(1.05);
+            transition: all 0.3s ease;
+        }
+
+        /* .smooth-scroll {
+            scroll-behavior: smooth;
+        } */
+
+        /* Financial Aid Estimator */
+        .calculator-card {
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+        }
+
+        .form-range::-webkit-slider-thumb {
+            background: #0d6efd;
+        }
+
+        .info-card {
+            text-align: center;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .info-card:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-5px);
+        }
+
+        .info-card i {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Form Validation */
+        .international-field {
+            display: none;
+        }
+
+        .needs-validation .form-control:invalid,
+        .needs-validation .form-select:invalid {
+            border-color: #dc3545;
+        }
+
+        .needs-validation .invalid-feedback {
+            display: block;
+        }
+
+        .calculator-step {
+            transition: opacity 0.3s ease;
+        }
+
+        /* Scroll to Top Button */
+        .btn-back-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 1000;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: none;
+            transition: all 0.3s ease;
+        }
+
+        .btn-back-top.show {
+            display: block;
+            animation: fadeInUp 0.3s ease;
+        }
+
+        .list-unstyled>li>a {
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container">
+            <a href="index.html"><img src="img/logo.png" alt="University Logo" width="200" height="60" style="background-color: #9eb1bd7c;"
+                    class="d-inline-block align-text-top me-2"></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <!-- <li class="nav-item"><a class="nav-link active" href="#">Home</a></li> -->
+                    <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="admissions.html">Admissions</a></li>
+                    <li class="nav-item"><a class="nav-link" href="academics.html">Academics</a></li>
+                    <li class="nav-item"><a class="nav-link" href="news.html">News & Events</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                    <li class="nav-item"><a class="nav-link" href="portal/login.html">Sign-in</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="admissions-hero bg-dark text-white py-5 mt-5">
+        <div class="container py-8">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <h1 class="display-4 fw-bold mb-4">Shape Your Future With Us</h1>
+                    <p class="lead mb-4">Join our diverse community of scholars and innovators. Applications for Fall
+                        2024 now being accepted.</p>
+                    <div class="d-flex gap-3">
+                        <a href="#apply-now" class="btn btn-primary btn-lg">Start Application</a>
+                        <a href="#virtual-tour" class="btn btn-outline-light btn-lg" id="virtualTourBtn">Virtual Campus
+                            Tour</a>
+                    </div>
+                </div>
+                <!--  -->
+                <div class="modal fade" id="tourOptionsModal" tabindex="-1">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header bg-primary text-white">
+                                <h5 class="modal-title">Choose Tour Type</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                            </div>
+                            <div class="modal-body text-center">
+                                <div class="row g-4">
+                                    <div class="col-md-6">
+                                        <div class="card h-100">
+                                            <div class="card-body">
+                                                <i class="bi bi-laptop display-5 text-primary mb-3"></i>
+                                                <h5>Virtual Experience</h5>
+                                                <p>Explore our campus online</p>
+                                                <a href="about.html#immersive-experience"
+                                                    class="btn btn-outline-primary w-100">
+                                                    Start Virtual Tour
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="card h-100">
+                                            <div class="card-body">
+                                                <i class="bi bi-geo-alt display-5 text-success mb-3"></i>
+                                                <h5>In-Person Visit</h5>
+                                                <p>Book a physical campus tour</p>
+                                                <button class="btn btn-success w-100" data-bs-toggle="modal"
+                                                    data-bs-target="#bookTourModal">
+                                                    Schedule Physical Tour
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Book Tour Modal -->
+                <div class="modal fade" id="bookTourModal" tabindex="-1">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header bg-success text-white">
+                                <h5 class="modal-title">Schedule Physical Campus Tour</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                            </div>
+                            <div class="modal-body">
+                                <form id="tourForm" class="needs-validation text-dark" novalidate>
+                                    <div class="progress mb-4">
+                                        <div class="progress-bar" role="progressbar" style="width: 33%"></div>
+                                    </div>
+
+                                    <!-- Step 1 -->
+                                    <div class="tour-step active" data-step="1">
+                                        <h5>Contact Information</h5>
+                                        <div class="mb-3">
+                                            <label class="form-label">Full Name</label>
+                                            <input type="text" class="form-control" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label">Email Address</label>
+                                            <input type="email" class="form-control" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label">Phone Number</label>
+                                            <input type="tel" class="form-control" pattern="[0-9]{10}" required>
+                                        </div>
+                                    </div>
+
+                                    <!-- Step 2 -->
+                                    <div class="tour-step d-none" data-step="2">
+                                        <h5>Tour Details</h5>
+                                        <div class="mb-3">
+                                            <label class="form-label">Preferred Date</label>
+                                            <input type="date" class="form-control" min="<?= date('Y-m-d') ?>" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label">Tour Type</label>
+                                            <select class="form-select" required>
+                                                <option value="">Select Tour Type</option>
+                                                <option>General Campus Tour</option>
+                                                <option>Department-Specific Tour</option>
+                                                <option>Admissions Overview</option>
+                                            </select>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label">Number of Guests</label>
+                                            <input type="number" class="form-control" min="1" max="5" value="1"
+                                                required>
+                                        </div>
+                                    </div>
+
+                                    <!-- Step 3 -->
+                                    <div class="tour-step d-none" data-step="3">
+                                        <h5>Confirmation</h5>
+                                        <div class="alert alert-info">
+                                            <p>Please review your information:</p>
+                                            <div id="reviewDetails"></div>
+                                        </div>
+                                        <div class="form-check mb-3">
+                                            <input class="form-check-input" type="checkbox" required>
+                                            <label class="form-check-label">
+                                                I agree to the tour guidelines and safety protocols
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    <div class="d-flex justify-content-between mt-4">
+                                        <button type="button" class="btn btn-secondary prev-step">Previous</button>
+                                        <button type="button" class="btn btn-success next-step">Next</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Success Modal -->
+                <div class="modal fade" id="successModal" tabindex="-1">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-body text-center py-5">
+                                <i class="bi bi-check-circle-fill text-success display-1 mb-3"></i>
+                                <h3>Tour Scheduled Successfully!</h3>
+                                <p>You will receive a confirmation email shortly.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--  -->
+                <div class="col-lg-6 mt-5 mt-lg-0">
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="display-5 fw-bold">92%</div>
+                            <div class="text-dark fw-bold">Graduation Rate</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="display-5 fw-bold">140+</div>
+                            <div class="text-dark fw-bold">Degree Programs</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="display-5 fw-bold">$60M</div>
+                            <div class="text-dark fw-bold">Annual Scholarships</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="display-5 fw-bold">#15</div>
+                            <div class="text-dark fw-bold">National Ranking</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Key Dates Section -->
+    <section class="key-dates py-5 bg-light">
+        <div class="container">
+            <h2 class="text-center mb-5">Important Dates & Deadlines</h2>
+            <div class="row g-4">
+                <!-- Existing Card -->
+                <div class="col-md-6 col-lg-3">
+                    <div class="date-card">
+                        <div class="date-header bg-primary text-white">
+                            <div class="month">OCT</div>
+                            <div class="day">15</div>
+                        </div>
+                        <div class="date-body">
+                            <h5>Early Decision Deadline</h5>
+                            <p>Priority application deadline for Fall 2024</p>
+                            <a href="#" class="btn btn-sm btn-outline-primary">Apply Now</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- New Date Cards -->
+                <div class="col-md-6 col-lg-3">
+                    <div class="date-card">
+                        <div class="date-header bg-success text-white">
+                            <div class="month">JAN</div>
+                            <div class="day">15</div>
+                        </div>
+                        <div class="date-body">
+                            <h5>Regular Decision Deadline</h5>
+                            <p>Final deadline for Fall 2024 applications</p>
+                            <div class="badge bg-warning text-dark">International Students</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-3">
+                    <div class="date-card">
+                        <div class="date-header bg-danger text-white">
+                            <div class="month">MAR</div>
+                            <div class="day">1</div>
+                        </div>
+                        <div class="date-body">
+                            <h5>Financial Aid Priority</h5>
+                            <p>FAFSA/CSS Profile submission deadline</p>
+                            <a href="#" class="text-danger small">FAFSA Guide <i class="bi bi-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-3">
+                    <div class="date-card">
+                        <div class="date-header bg-info text-white">
+                            <div class="month">APR</div>
+                            <div class="day">15</div>
+                        </div>
+                        <div class="date-body">
+                            <h5>Admission Decisions</h5>
+                            <p>Release date for regular decision applicants</p>
+                            <span class="badge bg-info">Decision Day</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Additional Row -->
+                <div class="col-md-6 col-lg-3">
+                    <div class="date-card">
+                        <div class="date-header bg-warning text-dark">
+                            <div class="month">MAY</div>
+                            <div class="day">1</div>
+                        </div>
+                        <div class="date-body">
+                            <h5>Enrollment Confirmation</h5>
+                            <p>Deadline to secure place with enrollment deposit</p>
+                            <div class="text-muted small">$500 non-refundable</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-3">
+                    <div class="date-card">
+                        <div class="date-header bg-purple text-white">
+                            <div class="month">JUL</div>
+                            <div class="day">15</div>
+                        </div>
+                        <div class="date-body">
+                            <h5>Housing Application</h5>
+                            <p>Priority deadline for campus housing</p>
+                            <a href="#" class="small">View Housing Options</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-3">
+                    <div class="date-card">
+                        <div class="date-header bg-dark text-white">
+                            <div class="month">AUG</div>
+                            <div class="day">25</div>
+                        </div>
+                        <div class="date-body">
+                            <h5>Fall Semester Begins</h5>
+                            <p>First day of classes for Fall 2024</p>
+                            <div class="text-success small">Orientation Week: Aug 18-22</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-3">
+                    <div class="date-card">
+                        <div class="date-header bg-secondary text-white">
+                            <div class="month">DEC</div>
+                            <div class="day">15</div>
+                        </div>
+                        <div class="date-body">
+                            <h5>Spring Applications</h5>
+                            <p>Deadline for Spring 2025 admission</p>
+                            <a href="#" class="btn btn-sm btn-outline-secondary">Spring Term Info</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-5">
+                <a href="#" class="btn btn-outline-dark">
+                    <i class="bi bi-calendar-event"></i> View Full Academic Calendar
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Admissions Process Section -->
+    <section class="admissions-process py-5 bg-white">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="display-5 fw-bold mb-3">Admissions Process</h2>
+                <p class="lead">A Step-by-Step Guide to Joining Our Community</p>
+            </div>
+
+            <div class="process-timeline">
+                <!-- Step 1 -->
+                <div class="process-step">
+                    <div class="step-header" data-bs-toggle="collapse" data-bs-target="#step1">
+                        <div class="step-indicator">
+                            <span class="number">1</span>
+                            <i class="bi bi-search icon"></i>
+                        </div>
+                        <h3 class="step-title">Explore Programs & Requirements</h3>
+                    </div>
+                    <div id="step1" class="step-content collapse show">
+                        <div class="card">
+                            <div class="card-body">
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item">
+                                        <i class="bi bi-clock-history me-2"></i>
+                                        <strong>Timeline:</strong> Ongoing
+                                    </li>
+                                    <li class="list-group-item">
+                                        <i class="bi bi-file-text me-2"></i>
+                                        Review program-specific requirements
+                                    </li>
+                                    <li class="list-group-item">
+                                        <i class="bi bi-calendar-check me-2"></i>
+                                        Note application deadlines
+                                    </li>
+                                </ul>
+                                <div class="mt-3">
+                                    <a href="academics.html#programs" class="btn btn-outline-primary">
+                                        Browse Programs <i class="bi bi-arrow-right"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="process-step">
+                    <div class="step-header" data-bs-toggle="collapse" data-bs-target="#step2">
+                        <div class="step-indicator">
+                            <span class="number">2</span>
+                            <i class="bi bi-file-earmark-text icon"></i>
+                        </div>
+                        <h3 class="step-title">Prepare & Submit Application</h3>
+                    </div>
+                    <div id="step2" class="step-content collapse">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row g-4">
+                                    <div class="col-md-6">
+                                        <h5>Application Checklist</h5>
+                                        <ul class="icon-list">
+                                            <li><i class="bi bi-check-circle text-success"></i> Completed online form
+                                            </li>
+                                            <li><i class="bi bi-check-circle text-success"></i> Official transcripts
+                                            </li>
+                                            <li><i class="bi bi-check-circle text-success"></i> Personal statement</li>
+                                            <li><i class="bi bi-check-circle text-success"></i> Letters of
+                                                recommendation</li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <h5>Submission Options</h5>
+                                        <div class="d-grid gap-2">
+                                            <a href="#" class="btn btn-primary">
+                                                <i class="bi bi-portfolio"></i> Apply Online
+                                            </a>
+                                            <a href="#" class="btn btn-outline-secondary">
+                                                <i class="bi bi-download"></i> Download PDF Form
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Additional Steps (3-5) -->
+                <div class="process-step">
+                    <div class="step-header" data-bs-toggle="collapse" data-bs-target="#step3">
+                        <div class="step-indicator">
+                            <span class="number">3</span>
+                            <i class="bi bi-clipboard-check icon"></i>
+                        </div>
+                        <h3 class="step-title">Application Review</h3>
+                    </div>
+                    <div id="step3" class="step-content collapse">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="alert alert-info">
+                                    <i class="bi bi-info-circle"></i> Average review time: 4-6 weeks
+                                </div>
+                                <h5>Review Criteria</h5>
+                                <div class="row">
+                                    <div class="col-md-4 criteria-card">
+                                        <div class="card h-100">
+                                            <div class="card-body">
+                                                <i class="bi bi-journal-richtext display-6 text-primary"></i>
+                                                <h6>Academic Achievement</h6>
+                                                <p class="small">Transcripts, test scores, and GPA</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Add more criteria cards -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Final Step -->
+                <div class="process-step">
+                    <div class="step-header" data-bs-toggle="collapse" data-bs-target="#step5">
+                        <div class="step-indicator">
+                            <span class="number">5</span>
+                            <i class="bi bi-person-check icon"></i>
+                        </div>
+                        <h3 class="step-title">Enrollment & Next Steps</h3>
+                    </div>
+                    <div id="step5" class="step-content collapse">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="enrollment-checklist">
+                                    <h5>After Acceptance</h5>
+                                    <div class="timeline-steps">
+                                        <div class="step completed">
+                                            <div class="step-icon"><i class="bi bi-check2"></i></div>
+                                            <span>Submit enrollment deposit</span>
+                                        </div>
+                                        <div class="step">
+                                            <div class="step-icon"><i class="bi bi-house-door"></i></div>
+                                            <span>Apply for housing</span>
+                                        </div>
+                                        <!-- Add more steps -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="process-resources mt-5">
+                <div class="card border-primary">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="bi bi-life-preserver"></i> Admissions Support</h5>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <ul class="list-unstyled">
+                                    <li><a href="about.html#faq"><i class="bi bi-question-circle"></i> FAQs</a></li>
+                                    <li><a href="#virtualTourBtn" class="schedule-tour-link"><i
+                                                class="bi bi-calendar-event"></i> Schedule Tour</a></li>
+                                </ul>
+                            </div>
+                            <div class="col-md-4">
+                                <ul class="list-unstyled">
+                                    <li><a href="about.html#leadership"><i class="bi bi-people"></i> Meet Our Team</a>
+                                    </li>
+                                    <li><a href="contact.html#department-contacts"><i class="bi bi-telephone"></i>
+                                            Contact Admissions</a></li>
+                                </ul>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="card download-card">
+                                    <div class="card-body">
+                                        <h6><i class="bi bi-download"></i> Application Toolkit</h6>
+                                        <a href="#" class="btn btn-sm btn-outline-primary">
+                                            Download Checklist (PDF)
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Application Modal -->
+    <div class="modal fade" id="applicationModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-primary text-white">
+                    <h5 class="modal-title">Premier University Application Form</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="applicationForm" class="needs-validation" novalidate>
+                        <div class="mb-4">
+                            <h5 class="border-bottom pb-2">Program Information</h5>
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label class="form-label">Program Type</label>
+                                    <select class="form-select" required>
+                                        <option value="">Select Program Type</option>
+                                        <option>Undergraduate</option>
+                                        <option>Graduate</option>
+                                        <option>Postgraduate Research</option>
+                                        <option>Professional Certification</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">Student Status</label>
+                                    <select class="form-select" id="studentStatus" required>
+                                        <option value="">Select Status</option>
+                                        <option value="domestic">Domestic Student</option>
+                                        <option value="international">International Student</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <h5 class="border-bottom pb-2">Personal Information</h5>
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label class="form-label">First Name</label>
+                                    <input type="text" class="form-control" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">Last Name</label>
+                                    <input type="text" class="form-control" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">Date of Birth</label>
+                                    <input type="date" class="form-control" required>
+                                </div>
+                                <div class="col-md-6 international-field">
+                                    <label class="form-label">Passport Number</label>
+                                    <input type="text" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <h5 class="border-bottom pb-2">Contact Information</h5>
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label class="form-label">Email Address</label>
+                                    <input type="email" class="form-control" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">Phone Number</label>
+                                    <input type="tel" class="form-control" pattern="[0-9]{10}" required>
+                                </div>
+                                <div class="col-12">
+                                    <label class="form-label">Mailing Address</label>
+                                    <textarea class="form-control" rows="3" required></textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <h5 class="border-bottom pb-2">Academic History</h5>
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label class="form-label">Previous Institution</label>
+                                    <input type="text" class="form-control" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">Graduation Year</label>
+                                    <input type="number" class="form-control" min="1900" max="2024" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">Upload Transcripts</label>
+                                    <input type="file" class="form-control" accept=".pdf,.doc,.docx" required>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <button type="submit" class="btn btn-primary w-100">Submit Application</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Requirements Section -->
+    <section class="requirements py-5 bg-light">
+        <div class="container">
+            <div class="row g-5">
+                <div class="col-lg-6">
+                    <div class="card h-100">
+                        <div class="card-header bg-primary text-white">
+                            <h3>Undergraduate Requirements</h3>
+                        </div>
+                        <div class="card-body">
+                            <ul class="checklist">
+                                <li class="fw-bold">Completed application form</li>
+                                <li class="fw-bold">Official high school transcripts</li>
+                                <li class="fw-bold">SAT/ACT scores (optional)</li>
+                                <li class="fw-bold">Personal statement</li>
+                                <li class="fw-bold">Letters of recommendation</li>
+                            </ul>
+                            <div class="accordion" id="ugAccordion">
+                                <!-- Add accordion items -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="card h-100">
+                        <div class="card-header bg-primary text-white">
+                            <h3>Graduate Requirements</h3>
+                        </div>
+                        <div class="card-body">
+                            <ul class="checklist">
+                                <li class="fw-bold">Bachelor's degree from accredited institution</li>
+                                <li class="fw-bold">Professional resume/CV</li>
+                                <li class="fw-bold">Statement of purpose</li>
+                                <li class="fw-bold">Letters of recommendation</li>
+                                <li class="fw-bold">GRE/GMAT scores (program specific)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Updated Scholarship Calculator -->
+    <section class="scholarship-calculator py-5">
+        <div class="container">
+            <h2 class="text-center mb-5">Financial Aid Estimator</h2>
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <div class="calculator-card bg-light p-4 rounded-3">
+                        <div class="progress-steps mb-4">
+                            <div class="progress" style="height: 5px;">
+                                <div class="progress-bar" role="progressbar" style="width: 33%;"></div>
+                            </div>
+                            <div class="d-flex justify-content-between mt-2">
+                                <span class="text-primary">Academics</span>
+                                <span>Financials</span>
+                                <span>Results</span>
+                            </div>
+                        </div>
+
+                        <form id="aidCalculator">
+                            <!-- Academics Step -->
+                            <div class="calculator-step active" data-step="1">
+                                <div class="mb-4">
+                                    <label class="form-label">Academic GPA</label>
+                                    <input type="range" class="form-range" id="gpaRange" min="2.0" max="4.0" step="0.1"
+                                        value="3.0">
+                                    <div class="d-flex justify-content-between">
+                                        <span>2.0</span>
+                                        <span id="gpaValue">3.0</span>
+                                        <span>4.0</span>
+                                    </div>
+                                </div>
+                                <div class="mb-4">
+                                    <label class="form-label">Standardized Test Score</label>
+                                    <input type="number" class="form-control" placeholder="Enter SAT/ACT score">
+                                </div>
+                                <div class="mb-4">
+                                    <label class="form-label">Extracurricular Activities</label>
+                                    <select class="form-select">
+                                        <option value="0">None</option>
+                                        <option value="1">1-2 Activities</option>
+                                        <option value="2">3-5 Activities</option>
+                                        <option value="3">5+ Activities</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <!-- Financials Step -->
+                            <div class="calculator-step d-none" data-step="2">
+                                <div class="mb-4">
+                                    <label class="form-label">Annual Family Income</label>
+                                    <select class="form-select" id="incomeLevel">
+                                        <option value="low">Under $50,000</option>
+                                        <option value="medium">$50,000 - $100,000</option>
+                                        <option value="high">Over $100,000</option>
+                                    </select>
+                                </div>
+                                <div class="mb-4">
+                                    <label class="form-label">Estimated Educational Expenses</label>
+                                    <select class="form-select" id="educationExpenses">
+                                        <option value="10000">$10,000 - Community College</option>
+                                        <option value="15000">$15,000 - State University</option>
+                                        <option value="25000" selected>$25,000 - Standard Program</option>
+                                        <option value="35000">$35,000 - Professional Degrees</option>
+                                        <option value="50000">$50,000 - Graduate Programs</option>
+                                    </select>
+                                </div>
+                                <div class="mb-4">
+                                    <label class="form-label">Other Financial Aid</label>
+                                    <select class="form-select" id="otherAid">
+                                        <option value="0">No other financial aid</option>
+                                        <option value="6495">Federal Pell Grant (up to $6,495)</option>
+                                        <option value="4000">State Grant Program (~$4,000)</option>
+                                        <option value="5000">Private Scholarship ($5,000)</option>
+                                        <option value="2000">Employer Assistance ($2,000)</option>
+                                        <option value="3000">Military Benefits ($3,000)</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <!-- Results Step -->
+                            <div class="calculator-step d-none" data-step="3">
+                                <div class="results mt-4">
+                                    <h4 class="mb-3">Estimated Financial Package</h4>
+                                    <div class="result-item">
+                                        <span>Academic Scholarship:</span>
+                                        <span class="amount">$12,500</span>
+                                    </div>
+                                    <div class="result-item">
+                                        <span>Need-Based Aid:</span>
+                                        <span class="amount">$8,200</span>
+                                    </div>
+                                    <div class="result-item">
+                                        <span>Total Estimated Aid:</span>
+                                        <span class="amount fw-bold">$20,700</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="d-flex justify-content-between mt-4">
+                                <button type="button" class="btn btn-secondary prev-step d-none"
+                                    disabled>Previous</button>
+                                <button type="button" class="btn btn-primary next-step" disabled>Next</button>
+                            </div>
+
+                            <!-- Add Submit Button to Last Step -->
+                            <div class="calculator-step d-none" data-step="3">
+                                <!-- ... existing results content ... -->
+                                <div class="d-flex justify-content-between mt-4">
+                                    <button type="button" class="btn btn-secondary prev-step">Previous</button>
+                                    <button type="button" class="btn btn-success" id="submitEstimate">Submit &
+                                        Refresh</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Enhanced International Students Section -->
+    <section class="international-students py-5 bg-dark text-white mb-5">
+        <div class="container">
+            <h2 class="text-center mb-5">International Admissions</h2>
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-3">
+                    <div class="info-card">
+                        <i class="bi bi-passport"></i>
+                        <h4>Visa Assistance</h4>
+                        <p>Dedicated support for student visa applications</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="info-card">
+                        <i class="bi bi-translate"></i>
+                        <h4>English Proficiency</h4>
+                        <p>TOEFL/IELTS requirements and preparation resources</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="info-card">
+                        <i class="bi bi-currency-exchange"></i>
+                        <h4>Financial Certification</h4>
+                        <p>Guidance on financial documentation</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="info-card">
+                        <i class="bi bi-people"></i>
+                        <h4>International Office</h4>
+                        <p>24/7 support for international students</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Enhanced Footer -->
+    <footer class="bg-dark text-white py-4 mt-auto">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-md-3">
+                    <h5>Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-white">Admissions</a></li>
+                        <li><a href="#" class="text-white">Academic Calendar</a></li>
+                        <li><a href="#" class="text-white">Student Portal</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h5>Resources</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-white">Library</a></li>
+                        <li><a href="#" class="text-white">Career Services</a></li>
+                        <li><a href="#" class="text-white">Alumni Network</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h5>Legal</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-white">Privacy Policy</a></li>
+                        <li><a href="#" class="text-white">Terms of Service</a></li>
+                        <li><a href="#" class="text-white">Accessibility</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h5>Connect</h5>
+                    <div class="social-links">
+                        <a href="#" class="text-white me-2"><i class="bi bi-facebook"></i></a>
+                        <a href="#" class="text-white me-2"><i class="bi bi-twitter-x"></i></a>
+                        <a href="#" class="text-white me-2"><i class="bi bi-linkedin"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-4 pt-3 border-top">
+                <p class="mb-0">&copy; 2023 Premier University. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Enhanced Scroll to Top Button -->
+    <button class="btn btn-primary btn-back-top">
+        <i class="bi bi-chevron-up"></i>
+    </button>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="scripts.js"></script>
+    <script>
+
+        // Form Validation for Navigation
+        function validateStep(step) {
+            const inputs = document.querySelectorAll(`[data-step="${step}"] input, 
+                                                [data-step="${step}"] select`);
+            return Array.from(inputs).every(input => {
+                if (input.required) {
+                    if (input.type === 'checkbox') return input.checked;
+                    return input.value.trim() !== '';
+                }
+                return true;
+            });
+        }
+
+        function updateNavigation() {
+            const isValid = validateStep(currentStep);
+            document.querySelector('.next-step').disabled = !isValid;
+            document.querySelector('.prev-step').disabled = currentStep === 1;
+        }
+
+        // Add input listeners for validation
+        document.querySelectorAll('#aidCalculator input, #aidCalculator select').forEach(input => {
+            input.addEventListener('input', () => {
+                updateNavigation();
+                calculateScholarship();
+            });
+        });
+
+        // Submit Handler for Calculator
+        document.getElementById('submitEstimate').addEventListener('click', () => {
+            document.getElementById('aidCalculator').reset();
+            currentStep = 1;
+            updateProgress();
+            steps.forEach(step => step.classList.add('d-none'));
+            steps[0].classList.remove('d-none');
+            alert('Thank you for using our estimator! Your form has been reset.');
+        });
+
+        // International Student Fields
+        document.getElementById('studentStatus').addEventListener('change', function () {
+            document.querySelectorAll('.international-field').forEach(field => {
+                field.style.display = this.value === 'international' ? 'block' : 'none';
+            });
+        });
+
+        // Form Validation for Application
+        document.getElementById('applicationForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            if (this.checkValidity()) {
+                // Submit form logic here
+                alert('Application submitted successfully!');
+                this.reset();
+                bootstrap.Modal.getInstance(document.getElementById('applicationModal')).hide();
+            } else {
+                this.classList.add('was-validated');
+            }
+        });
+
+        // Application Modal Trigger
+        document.querySelector('[href="#apply-now"]').addEventListener('click', function (e) {
+            e.preventDefault();
+            new bootstrap.Modal(document.getElementById('applicationModal')).show();
+        });
+
+        // Scholarship Calculator Logic
+        let currentStep = 1;
+        const steps = document.querySelectorAll('.calculator-step');
+
+        document.querySelectorAll('.next-step').forEach(button => {
+            button.addEventListener('click', () => {
+                if (currentStep < 3) {
+                    steps[currentStep - 1].classList.add('d-none');
+                    steps[currentStep].classList.remove('d-none');
+                    currentStep++;
+                    updateProgress();
+                }
+            });
+        });
+
+        document.querySelector('.prev-step').addEventListener('click', () => {
+            if (currentStep > 1) {
+                steps[currentStep - 1].classList.add('d-none');
+                steps[currentStep - 2].classList.remove('d-none');
+                currentStep--;
+                updateProgress();
+            }
+        });
+
+        function updateProgress() {
+            const progressBar = document.querySelector('.progress-bar');
+            progressBar.style.width = `${(currentStep - 1) * 33}%`;
+
+            document.querySelector('.prev-step').classList.toggle('d-none', currentStep === 1);
+            document.querySelector('.next-step').classList.toggle('d-none', currentStep === 3);
+        }
+
+        // GPA Display Update
+        document.getElementById('gpaRange').addEventListener('input', function () {
+            document.getElementById('gpaValue').textContent = this.value;
+        });
+
+        // Scholarship Calculation Logic
+        function calculateScholarship() {
+            const gpa = parseFloat(document.getElementById('gpaRange').value);
+            const income = document.getElementById('incomeLevel').value;
+            const expenses = parseInt(document.getElementById('educationExpenses').value);
+            const otherAid = parseInt(document.getElementById('otherAid').value);
+
+            // Base scholarship calculation
+            let baseScholarship = 0;
+            if (gpa >= 3.8) baseScholarship = 15000;
+            else if (gpa >= 3.5) baseScholarship = 10000;
+            else if (gpa >= 3.0) baseScholarship = 5000;
+
+            // Need-based calculation
+            let needBased = 0;
+            const financialNeed = expenses - otherAid;
+
+            if (income === 'low' && financialNeed > 15000) needBased = 8000;
+            else if (income === 'medium' && financialNeed > 20000) needBased = 4000;
+            else if (income === 'high') needBased = 0;
+
+            // Update display
+            document.querySelectorAll('.amount')[0].textContent = `$${baseScholarship.toLocaleString()}`;
+            document.querySelectorAll('.amount')[1].textContent = `$${needBased.toLocaleString()}`;
+            document.querySelectorAll('.amount')[2].textContent = `$${(baseScholarship + needBased).toLocaleString()}`;
+
+            // Initialize collapsible steps
+            document.querySelectorAll('.step-header').forEach(header => {
+                header.addEventListener('click', () => {
+                    const target = document.querySelector(header.dataset.bsTarget);
+                    const isShown = target.classList.contains('show');
+
+                    // Close all other steps
+                    document.querySelectorAll('.step-content').forEach(content => {
+                        if (content !== target) content.classList.remove('show');
+                    });
+
+                    // Toggle current step
+                    if (!isShown) target.classList.add('show');
+                });
+            });
+        }
+
+        // // Smooth scroll and highlight functionality
+        // document.querySelectorAll('.schedule-tour-link').forEach(link => {
+        //     link.addEventListener('click', function (e) {
+        //         e.preventDefault();
+        //         document.documentElement.classList.add('smooth-scroll');
+        //         const target = document.querySelector(this.getAttribute('href'));
+        //         target.scrollIntoView({ behavior: 'smooth' });
+
+        //         // Add highlight effect
+        //         const btn = document.getElementById('virtualTourBtn');
+        //         btn.classList.add('highlight-button');
+        //         setTimeout(() => btn.classList.remove('highlight-button'), 3000);
+        //     });
+        // });
+
+
+        // Enhanced Scroll to Top Functionality
+        const scrollButton = document.querySelector('.btn-back-top');
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                scrollButton.classList.add('show');
+            } else {
+                scrollButton.classList.remove('show');
+            }
+        });
+
+        scrollButton.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Initialize Tooltips
+        const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+        [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl));
+
+        // Animate Elements on Scroll
+        const animateOnScroll = () => {
+            const elements = document.querySelectorAll('.animate-on-scroll');
+
+            elements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const elementBottom = element.getBoundingClientRect().bottom;
+
+                if (elementTop < window.innerHeight && elementBottom > 0) {
+                    element.classList.add('animated');
+                }
+            });
+        };
+
+        window.addEventListener('scroll', animateOnScroll);
+        animateOnScroll(); // Initial check
+
+        // Virtual Tour Button Click Handler
+        document.getElementById('virtualTourBtn').addEventListener('click', function (e) {
+            e.preventDefault();
+            new bootstrap.Modal(document.getElementById('tourOptionsModal')).show();
+        });
+
+        // Tour Booking Form Handling
+        let currentTourStep = 1;
+        const tourSteps = document.querySelectorAll('.tour-step');
+        const progressBar = document.querySelector('#bookTourModal .progress-bar');
+
+        document.querySelectorAll('#tourForm .next-step').forEach(button => {
+            button.addEventListener('click', () => {
+                if (validateTourStep(currentTourStep)) {
+                    if (currentTourStep < 3) {
+                        updateTourStep(currentTourStep + 1);
+                    } else {
+                        submitTourForm();
+                    }
+                }
+            });
+        });
+
+        document.querySelectorAll('#tourForm .prev-step').forEach(button => {
+            button.addEventListener('click', () => {
+                if (currentTourStep > 1) {
+                    updateTourStep(currentTourStep - 1);
+                }
+            });
+        });
+
+        function updateTourStep(step) {
+            tourSteps[currentTourStep - 1].classList.remove('active');
+            tourSteps[currentTourStep - 1].classList.add('d-none');
+            currentTourStep = step;
+            tourSteps[currentTourStep - 1].classList.remove('d-none');
+            tourSteps[currentTourStep - 1].classList.add('active');
+
+            // Update progress bar
+            progressBar.style.width = `${(currentTourStep - 1) * 33}%`;
+
+            // Update button text
+            const nextBtn = document.querySelector('#tourForm .next-step');
+            nextBtn.textContent = currentTourStep === 3 ? 'Submit' : 'Next';
+        }
+
+        function validateTourStep(step) {
+            const inputs = document.querySelectorAll(`.tour-step[data-step="${step}"] input, 
+                                           .tour-step[data-step="${step}"] select`);
+            let isValid = true;
+
+            inputs.forEach(input => {
+                if (!input.checkValidity()) {
+                    input.reportValidity();
+                    isValid = false;
+                }
+            });
+
+            return isValid;
+        }
+
+        function submitTourForm() {
+            if (validateTourStep(3)) {
+                // Submit form logic here
+                new bootstrap.Modal(document.getElementById('bookTourModal')).hide();
+                const successModal = new bootstrap.Modal(document.getElementById('successModal'));
+                successModal.show();
+
+                setTimeout(() => {
+                    successModal.hide();
+                    window.location.reload();
+                }, 3000);
+            }
+        }
+
+        // Reset form when modal closes
+        document.getElementById('bookTourModal').addEventListener('hidden.bs.modal', () => {
+            document.getElementById('tourForm').reset();
+            updateTourStep(1);
+        });
+    </script>
+</body>
+
+</html>

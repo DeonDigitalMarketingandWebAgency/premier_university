@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Academic Schedule | Premier University</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/chart.js@3.7.0/dist/chart.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #002147;
+            --secondary-color: #f8f9fa;
+            --accent-color: #ffd700;
+            --success-color: #28a745;
+            --info-color: #17a2b8;
+            --warning-color: #ffc107;
+            --danger-color: #dc3545;
+        }
+
+        .sidebar {
+            background: var(--primary-color);
+            min-height: 100vh;
+            box-shadow: 3px 0 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-link {
+            color: rgba(255, 255, 255, 0.8) !important;
+            transition: all 0.3s ease;
+            border-radius: 8px;
+            margin: 4px 12px;
+            padding: 12px 20px !important;
+        }
+
+        .nav-link.active {
+            background: linear-gradient(45deg, var(--accent-color), #ffc107);
+            color: var(--primary-color) !important;
+            font-weight: 500;
+            border-left: 0;
+        }
+
+        .nav-link:hover:not(.active) {
+            background: rgba(255, 255, 255, 0.05);
+            transform: translateX(4px);
+        }
+
+        .card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+        }
+
+        .dashboard-header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, var(--primary-color), #003366);
+            color: white;
+            border-radius: 15px;
+            overflow: hidden;
+        }
+
+        .calendar-day {
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border-radius: 8px;
+        }
+
+        .calendar-day:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 280px;
+                transform: translateX(-100%);
+                transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            }
+
+            .sidebar.active {
+                transform: translateX(0);
+            }
+
+            .main-content {
+                margin-left: 0 !important;
+            }
+        }
+
+        /* Grades */
+        .grade-chart-container {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .gpa-calculator {
+            background: linear-gradient(135deg, #002147, #003366);
+            color: white;
+            border-radius: 15px;
+            padding: 2rem;
+        }
+
+        .assignment-detail {
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .assignment-detail:hover {
+            background: #f8f9fa;
+            transform: translateX(5px);
+        }
+
+        /* Time-table */
+        .timetable-grid {
+            --cell-height: 80px;
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+        }
+
+        .time-slot {
+            height: var(--cell-height);
+            border-bottom: 1px solid #dee2e6;
+            position: relative;
+        }
+
+        .class-event {
+            background: #002147;
+            color: white;
+            border-radius: 8px;
+            padding: 8px;
+            position: absolute;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .class-event:hover {
+            transform: scale(1.02);
+            box-shadow: 0 3px 15px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+
+<body class="bg-light">
+    <!-- Mobile Header -->
+    <nav class="navbar navbar-dark bg-primary d-lg-none">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <img src="../img/logo.png" alt="Logo" height="30" class="me-2">
+                Premier University
+            </a>
+            <button class="navbar-toggler" type="button" id="mobileMenuToggle">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="container-fluid">
+            <div class="row">
+                <!-- Sidebar -->
+                <nav class="col-lg-2 sidebar fixed-top vh-100">
+                    <div class="sidebar-sticky pt-4">
+                        <div class="text-center mb-4">
+                            <img src="../img/logo.png" alt="University Logo" class="img-fluid"
+                                style="max-width: 198px;">
+                        </div>
+                        <ul class="nav flex-column">
+                            <li class="nav-item">
+                                <a class="nav-link" href="dashboard.html">
+                                    <i class="bi bi-speedometer2 me-2"></i> Dashboard
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="my-courses.html">
+                                    <i class="bi bi-journal-bookmark me-2"></i> My Courses
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="grades.html">
+                                    <i class="bi bi-clipboard-data me-2"></i> Grades
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link active" href="timetable.html">
+                                    <i class="bi bi-calendar-event me-2"></i> Timetable
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="payments.html">
+                                    <i class="bi bi-credit-card me-2"></i> Payments
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+
+                <!-- Main Content -->
+                <main class="col-lg-10 ms-sm-auto px-lg-4 main-content">
+                    <!-- Header -->
+                    <div class="dashboard-header d-flex justify-content-between flex-wrap align-items-center pt-4 pb-3 px-4 mt-3"
+                        style="position: relative; margin-top: 1.5rem;">
+                        <h1 class="h3 mb-0">Student Dashboard</h1>
+                        <div class="d-flex align-items-center">
+                            <div class="dropdown" style="position: relative;">
+                                <button class="btn btn-outline-primary rounded-pill" type="button"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="bi bi-person-circle me-2"></i>John Doe
+                                    <i class="bi bi-chevron-down ms-2"></i>
+                                </button>
+                                <ul class="dropdown-menu dropdown-menu-end"
+                                    style="z-index: 1300 !important; position: absolute; top: 100%; left: auto; right: 0;">
+                                    <li><a class="dropdown-item" href="profile.html">
+                                            <i class="bi bi-person me-2"></i>Profile</a></li>
+                                    <li><a class="dropdown-item" href="settings.html">
+                                            <i class="bi bi-gear me-2"></i>Settings</a></li>
+                                    <li><a class="dropdown-item d-flex justify-content-between align-items-center"
+                                            href="notifications.html">
+                                            <span><i class="bi bi-bell me-2"></i>Notifications</span>
+                                            <span class="badge bg-danger rounded-pill">2</span>
+                                        </a></li>
+                                    <li><a class="dropdown-item" href="help.html">
+                                            <i class="bi bi-question-circle me-2"></i>Help</a></li>
+                                    <li>
+                                        <hr class="dropdown-divider">
+                                    </li>
+                                    <li><a class="dropdown-item text-danger" href="login.html">
+                                            <i class="bi bi-box-arrow-left me-2"></i>Logout</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Timetable Content -->
+                    <div class="container-fluid pt-4">
+                        <div class="card">
+                            <div class="card-header d-flex justify-content-between align-items-center">
+                                <h5 class="mb-0">Weekly Schedule</h5>
+                                <div class="btn-group">
+                                    <button class="btn btn-primary">
+                                        <i class="bi bi-google me-2"></i>Sync Calendar
+                                    </button>
+                                    <button class="btn btn-outline-primary">
+                                        <i class="bi bi-download me-2"></i>Export
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="timetable-grid">
+                                    <div class="row g-0">
+                                        <!-- Timetable columns -->
+                                        <div class="col" style="min-width: 150px;">
+                                            <div class="time-slot bg-light"></div>
+                                            <div class="time-slot">8:00 AM</div>
+                                            <!-- More time slots -->
+                                        </div>
+                                        <!-- Day columns -->
+                                        <div class="col">
+                                            <div class="time-slot bg-light text-center fw-bold">Mon</div>
+                                            <div class="time-slot">
+                                                <div class="class-event" style="top: 20%; height: 44%">
+                                                    Advanced Calculus<br>
+                                                    <small>Room 204</small>
+                                                </div>
+                                            </div>
+                                            <!-- More events -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Add these features -->
+                        <div class="card my-4">
+                            <div class="card-header">
+                                <div class="d-flex justify-content-between">
+                                    <h5>Schedule Options</h5>
+                                    <div class="btn-group">
+                                        <button class="btn btn-outline-primary active">Week View</button>
+                                        <button class="btn btn-outline-primary">Month View</button>
+                                        <button class="btn btn-outline-primary">List View</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <!-- Add timetable conflict checker -->
+                                <div class="alert alert-warning d-flex align-items-center">
+                                    <i class="bi bi-exclamation-triangle me-2"></i>
+                                    Potential conflict detected between MATH 301 and PHYS 201
+                                </div>
+
+                                <!-- Add location map integration -->
+                                <div class="timetable-location mt-4">
+                                    <h6><i class="bi bi-geo-alt"></i> Today's Locations</h6>
+                                    <div class="map-preview" style="height: 200px;">
+                                        <!-- Embedded map component -->
+                                    </div>
+                                </div>
+
+                                <!-- Add class preparation checklist -->
+                                <div class="preparation-checklist mt-4">
+                                    <h6><i class="bi bi-check2-square"></i> Preparation for Next Class</h6>
+                                    <ul class="list-group">
+                                        <li class="list-group-item">
+                                            <input class="form-check-input me-2" type="checkbox">
+                                            Read Chapter 4: Differential Equations
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                <button class="btn btn-ar my-4">
+                                    <i class="bi bi-camera"></i> AR Wayfinding
+                                </button>
+
+                                <div class="energy-map">
+                                    <div class="day-energy" data-day="mon" data-energy="high"></div>
+                                    <!-- ... -->
+                                </div>
+
+                                <div class="schedule-optimizer">
+                                    <button class="btn btn-ai">
+                                        <i class="bi bi-magic"></i> Optimize My Schedule
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+            </div>
+        </div>
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+        <script>
+            // Mobile Menu Toggle
+            document.getElementById('mobileMenuToggle').addEventListener('click', () => {
+                document.querySelector('.sidebar').classList.toggle('active');
+            });
+
+            // Close mobile menu when clicking outside
+            document.addEventListener('click', (e) => {
+                const sidebar = document.querySelector('.sidebar');
+                if (window.innerWidth < 992 && !e.target.closest('.sidebar') && !e.target.closest('#mobileMenuToggle')) {
+                    sidebar.classList.remove('active');
+                }
+            });
+
+            // Initialize calendar
+            function initializeCalendar() {
+                // Calendar implementation using a library like FullCalendar
+            }
+            initializeCalendar();
+
+            // Initialize Grade Chart
+            new Chart(document.getElementById('gradeChart'), {
+                type: 'bar',
+                data: {
+                    labels: ['A', 'A-', 'B+', 'B', 'B-'],
+                    datasets: [{
+                        label: 'Grade Distribution',
+                        data: [12, 8, 5, 3, 2],
+                        backgroundColor: '#002147'
+                    }]
+                }
+            });
+
+            // Add hover tooltips
+            const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+            const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+
+            // Dynamic content loading
+            document.querySelectorAll('.async-load').forEach(element => {
+                element.addEventListener('click', async (e) => {
+                    const content = await fetchContent(e.target.dataset.src);
+                    element.parentElement.innerHTML = content;
+                });
+            });
+        </script>
+</body>
+
+</html>

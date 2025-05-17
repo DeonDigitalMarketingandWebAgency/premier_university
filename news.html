@@ -1,0 +1,1146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Welcome to Premier University - Transforming Education Since 1990">
+    <title>Premier University - Home</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link href="style.css" rel="stylesheet">
+    <style>
+        /* Additional Styles */
+        .fc-event {
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .fc-event:hover {
+            transform: translateY(-2px);
+        }
+
+        /* #scrollTop {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            display: none;
+            z-index: 1000;
+        } */
+
+        /* Scroll to Top Button */
+        .btn-back-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 1000;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: none;
+            transition: all 0.3s ease;
+        }
+
+        .btn-back-top.show {
+            display: block;
+            animation: fadeInUp 0.3s ease;
+        }
+
+        .archive-list li a {
+            transition: background-color 0.2s;
+        }
+
+        .archive-list li a:hover {
+            background-color: rgba(0, 0, 0, 0.05);
+        }
+
+        .news-item .card {
+            transition: box-shadow 0.2s;
+        }
+
+        .news-item .card:hover {
+            box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .15);
+        }
+
+        /* News Item Container */
+        .news-item {
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 1.5rem;
+            border-radius: 8px;
+            transition: transform 0.3s ease;
+        }
+
+        .news-item:hover {
+            transform: translateY(-5px);
+        }
+
+        /* Image Container */
+        .news-image-container {
+            position: relative;
+            height: 300px;
+            overflow: hidden;
+        }
+
+        /* Category badge */
+        .news-image-container .badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            z-index: 3;
+            /* Ensure it's above both overlays */
+            transition: opacity 0.3s ease;
+        }
+
+        /* Ensure badge stays visible on hover */
+        .news-item:hover .badge {
+            opacity: 1 !important;
+        }
+
+        .news-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        /* Title Overlay */
+        .title-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 1.5rem;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+            color: white;
+            z-index: 1;
+        }
+
+        /* Hover Content */
+        .hover-content {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            padding: 2rem;
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            z-index: 2;
+            /* Lower than badge's z-index */
+        }
+
+        .news-item:hover .hover-content {
+            opacity: 1;
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .news-image-container {
+                height: 250px;
+            }
+
+            .title-overlay {
+                padding: 1rem;
+            }
+
+            .hover-content {
+                padding: 1.5rem;
+            }
+        }
+
+        /* News Items */
+        /* .news-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            aspect-ratio: 1;
+            height: 300px;
+        } */
+
+        .news-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .title-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 1rem;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.9));
+            color: white;
+            transition: all 0.3s ease;
+            z-index: 1;
+        }
+
+        .hover-content {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            padding: 1.5rem;
+            background: rgba(0, 0, 0, 0.9);
+            color: white;
+            opacity: 0;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            z-index: 2;
+        }
+
+        .news-item:hover .title-overlay {
+            opacity: 0;
+        }
+
+        .news-item:hover .hover-content {
+            opacity: 1;
+        }
+
+        /* Archive Tabs */
+        .archive-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .archive-tab {
+            padding: 0.5rem 1rem;
+            border: 1px solid #dee2e6;
+            background: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            min-width: 80px;
+            text-align: center;
+        }
+
+        .archive-tab.active {
+            background: #0d6efd;
+            color: white;
+            border-color: #0d6efd;
+        }
+
+        .archive-tab:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .archive-pane {
+            display: none;
+        }
+
+        .archive-pane.active {
+            display: block;
+        }
+
+        .list-unstyled>li>a {
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container">
+            <a href="index.html"><img src="img/logo.png" alt="University Logo" width="200" height="60" style="background-color: #9eb1bd7c; padding: 5px; border-radius: 8px;"
+                class="d-inline-block align-text-top me-2"></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <!-- <li class="nav-item"><a class="nav-link active" href="#">Home</a></li> -->
+                    <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="admissions.html">Admissions</a></li>
+                    <li class="nav-item"><a class="nav-link" href="academics.html">Academics</a></li>
+                    <li class="nav-item"><a class="nav-link" href="news.html">News & Events</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                    <li class="nav-item"><a class="nav-link" href="portal/login.html">Sign-in</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="news-hero">
+        <div class="container h-100 d-flex align-items-center">
+            <div class="text-white">
+                <h1 class="display-3">News & Events</h1>
+                <p class="lead">Stay updated with campus happenings</p>
+            </div>
+        </div>
+    </header>
+
+    <!-- News Filters -->
+    <!-- <section class="py-5">
+        <div class="container">
+            <div class="row mb-4">
+                <div class="col-md-6">
+                    <h2>Latest News</h2>
+                </div>
+                <div class="col-md-6">
+                    <div class="d-flex">
+                        <select class="form-select me-2" id="newsCategory">
+                            <option value="all">All Categories</option>
+                            <option value="academic">Academic</option>
+                            <option value="events">Events</option>
+                            <option value="research">Research</option>
+                        </select>
+                        <select class="form-select" id="newsYear">
+                            <option value="all">All Years</option>
+                            <option value="2023">2023</option>
+                            <option value="2022">2022</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row g-4" id="newsContainer">
+                <div class="col-md-4 news-item" data-category="academic" data-year="2023">
+                    <div class="card h-100">
+                        <div class="card-img-top position-relative">
+                            <img src="news1.jpg" class="card-img-top" alt="News">
+                            <span class="badge bg-primary position-absolute top-0 end-0 m-2">Academic</span>
+                        </div>
+                        <div class="card-body">
+                            <small class="text-muted">October 15, 2023</small>
+                            <h5 class="card-title mt-1">New Computer Science Program</h5>
+                            <p class="card-text">Starting next semester, we'll offer...</p>
+                            <a href="#" class="btn btn-sm btn-outline-primary">Read More</a>
+                        </div>
+                    </div>
+                </div> -->
+    <!-- More news items -->
+    <!-- </div>
+            <div class="text-center mt-4">
+                <button class="btn btn-primary" id="loadMore">Load More</button>
+            </div>
+        </div>
+    </section> -->
+
+    <!-- News Filters -->
+    <section class="py-5">
+        <div class="container">
+            <div class="row mb-4">
+                <div class="col-md-6">
+                    <h2>Latest News</h2>
+                </div>
+                <div class="col-md-6">
+                    <div class="d-flex">
+                        <select class="form-select me-2" id="newsCategory">
+                            <option value="all">All Categories</option>
+                            <option value="academic">Academic</option>
+                            <option value="events">Events</option>
+                            <option value="research">Research</option>
+                            <option value="sports">Sports</option>
+                            <option value="alumni">Alumni</option>
+                            <option value="campus">Campus Life</option>
+                        </select>
+                        <select class="form-select" id="newsYear">
+                            <option value="all">All Years</option>
+                            <option value="2025">2025</option>
+                            <option value="2024">2024</option>
+                            <option value="2023">2023</option>
+                            <option value="2022">2022</option>
+                            <option value="2021">2021</option>
+                            <option value="2020">2020</option>
+                            <option value="2019">2019</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row g-4" id="newsContainer">
+                <!-- Generated news items will be inserted here -->
+            </div>
+            <div class="text-center mt-4">
+                <button class="btn btn-primary" id="loadMore">Load More</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modified News Item Structure -->
+    <!-- <div class="col-md-4 news-item" data-category="academic" data-year="2023">
+        <div class="news-image-container">
+            <img src="img/pexels-markusspiske-177598.jpg" class="news-image" alt="News Image" loading="lazy">
+            <div class="title-overlay">
+                <h3 class="mb-0">New Computer Science Program</h3>
+                <small>October 15, 2023</small>
+            </div>
+            <div class="hover-content">
+                <h3>New Computer Science Program</h3>
+                <p class="mt-2">Starting next semester, we'll offer cutting-edge courses in AI and machine learning...
+                </p>
+                <div class="mt-auto">
+                    <a href="#" class="btn btn-outline-light">Read More</a>
+                </div>
+            </div>
+        </div>
+    </div> -->
+
+
+    <!-- Events Calendar -->
+    <!-- <section class="py-5 bg-light">
+        <div class="container">
+            <h2 class="text-center mb-5">Events Calendar</h2>
+            <div class="row">
+                <div class="col-md-8 mx-auto">
+                    <div id="calendar"></div>
+                </div>
+            </div>
+        </div>
+    </section> -->
+
+    <!-- Events Calendar Section -->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <h2 class="text-center mb-5">Events Calendar</h2>
+            <div class="row">
+                <div class="col-md-8 mx-auto">
+                    <div id="calendar"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Subscription Form -->
+    <section class="py-5">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    <div class="card">
+                        <div class="card-body text-center">
+                            <h3 class="card-title">Stay Updated</h3>
+                            <p class="card-text">Subscribe to our newsletter for the latest news and events</p>
+                            <form class="mt-3">
+                                <div class="input-group">
+                                    <input type="email" class="form-control" placeholder="Your email" required>
+                                    <button class="btn btn-primary" type="submit">Subscribe</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- News Archive -->
+    <!-- <section class="py-5 bg-light">
+        <div class="container">
+            <h2 class="text-center mb-5">News Archive</h2>
+            <div class="row">
+                <div class="col-md-4">
+                    <h4>2023</h4>
+                    <ul class="list-unstyled">
+                        <li><a href="#">October News</a></li>
+                        <li><a href="#">September News</a></li>
+                    </ul>
+                </div> -->
+    <!-- More archive years -->
+    <!-- </div>
+        </div>
+    </section> -->
+
+    <!-- News Archive Section -->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <h2 class="text-center mb-5">News Archive</h2>
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4>2023</h4>
+                            <div class="archive-search mb-3">
+                                <input type="text" class="form-control" placeholder="Search 2023 archive...">
+                            </div>
+                            <ul class="list-unstyled archive-list">
+                                <li><a href="#" class="d-flex justify-content-between align-items-center py-2">
+                                        <span>October News</span>
+                                        <small class="text-muted">15 entries</small>
+                                    </a></li>
+                                <li><a href="#" class="d-flex justify-content-between align-items-center py-2">
+                                        <span>September News</span>
+                                        <small class="text-muted">12 entries</small>
+                                    </a></li>
+                                <!-- Additional 2023 Months -->
+                                <li><a href="#" class="d-flex justify-content-between align-items-center py-2">
+                                        <span>August News</span>
+                                        <small class="text-muted">10 entries</small>
+                                    </a></li>
+                                <li><a href="#" class="d-flex justify-content-between align-items-center py-2">
+                                        <span>July News</span>
+                                        <small class="text-muted">8 entries</small>
+                                    </a></li>
+                                <!-- Add 6 more months -->
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4>2022</h4>
+                            <div class="archive-search mb-3">
+                                <input type="text" class="form-control" placeholder="Search 2022 archive...">
+                            </div>
+                            <ul class="list-unstyled archive-list">
+                                <li><a href="#" class="d-flex justify-content-between align-items-center py-2">
+                                        <span>October News</span>
+                                        <small class="text-muted">15 entries</small>
+                                    </a></li>
+                                <li><a href="#" class="d-flex justify-content-between align-items-center py-2">
+                                        <span>September News</span>
+                                        <small class="text-muted">12 entries</small>
+                                    </a></li>
+                                <!-- Additional 2023 Months -->
+                                <li><a href="#" class="d-flex justify-content-between align-items-center py-2">
+                                        <span>August News</span>
+                                        <small class="text-muted">10 entries</small>
+                                    </a></li>
+                                <li><a href="#" class="d-flex justify-content-between align-items-center py-2">
+                                        <span>July News</span>
+                                        <small class="text-muted">8 entries</small>
+                                    </a></li>
+                                <!-- Add 6 more months -->
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4>2021</h4>
+                            <div class="archive-search mb-3">
+                                <input type="text" class="form-control" placeholder="Search 2021 archive...">
+                            </div>
+                            <ul class="list-unstyled archive-list">
+                                <li><a href="#" class="d-flex justify-content-between align-items-center py-2">
+                                        <span>October News</span>
+                                        <small class="text-muted">15 entries</small>
+                                    </a></li>
+                                <li><a href="#" class="d-flex justify-content-between align-items-center py-2">
+                                        <span>September News</span>
+                                        <small class="text-muted">12 entries</small>
+                                    </a></li>
+                                <!-- Additional 2023 Months -->
+                                <li><a href="#" class="d-flex justify-content-between align-items-center py-2">
+                                        <span>August News</span>
+                                        <small class="text-muted">10 entries</small>
+                                    </a></li>
+                                <li><a href="#" class="d-flex justify-content-between align-items-center py-2">
+                                        <span>July News</span>
+                                        <small class="text-muted">8 entries</small>
+                                    </a></li>
+                                <!-- Add 6 more months -->
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!-- Add archive sections for other years if needed -->
+            </div>
+        </div>
+        <!-- </script> -->
+    </section>
+
+    <!-- Additional Enhancements -->
+
+    <!-- Scroll to Top Button -->
+    <!-- <button id="scrollTop" class="btn btn-primary rounded-circle shadow"> -->
+    <!-- <button id="scrollTop" class="btn btn rounded-circle shadow">
+        <i class="bi bi-arrow-up"></i>
+    </button> -->
+
+    <!-- Social Sharing Modal -->
+    <div class="modal fade" id="shareModal">
+        <!-- Modal content for social sharing -->
+    </div>
+
+    <!-- Footer -->
+    <!-- <footer class="bg-dark text-white py-4">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4">
+                        <h5>Contact Us</h5>
+                        <p>123 University Road<br>City, State 12345</p>
+                    </div>
+                    <div class="col-md-4">
+                        <h5>Quick Links</h5>
+                        <ul class="list-unstyled">
+                            <li><a href="about.html" class="text-white">About</a></li>
+                            <li><a href="admissions.html" class="text-white">Admissions</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-4">
+                        <h5>Social Media</h5> -->
+    <!-- Social icons -->
+    <!-- </div>
+                </div>
+            </div>
+        </footer> -->
+
+
+    <!-- Enhanced Footer -->
+    <footer class="bg-dark text-white py-4 mt-auto">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-md-3">
+                    <h5>Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-white">Admissions</a></li>
+                        <li><a href="#" class="text-white">Academic Calendar</a></li>
+                        <li><a href="#" class="text-white">Student Portal</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h5>Resources</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-white">Library</a></li>
+                        <li><a href="#" class="text-white">Career Services</a></li>
+                        <li><a href="#" class="text-white">Alumni Network</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h5>Legal</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-white">Privacy Policy</a></li>
+                        <li><a href="#" class="text-white">Terms of Service</a></li>
+                        <li><a href="#" class="text-white">Accessibility</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h5>Connect</h5>
+                    <div class="social-links">
+                        <a href="#" class="text-white me-2"><i class="bi bi-facebook"></i></a>
+                        <a href="#" class="text-white me-2"><i class="bi bi-twitter-x"></i></a>
+                        <a href="#" class="text-white me-2"><i class="bi bi-linkedin"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-4 pt-3 border-top">
+                <p class="mb-0">&copy; 2023 Premier University. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Enhanced Scroll to Top Button -->
+    <button class="btn btn-primary btn-back-top">
+        <i class="bi bi-chevron-up"></i>
+    </button>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js"></script>
+    <script src="scripts.js"></script>
+    <!-- <script>
+        // Initialize calendar
+        document.addEventListener('DOMContentLoaded', function () {
+            const calendarEl = document.getElementById('calendar');
+            const calendar = new FullCalendar.Calendar(calendarEl, {
+                initialView: 'dayGridMonth',
+                events: [
+                    {
+                        title: 'Open Day',
+                        start: '2023-11-15'
+                    },
+                    // More events
+                ]
+            });
+            calendar.render();
+        });
+
+        // Filter news
+        document.getElementById('newsCategory').addEventListener('change', filterNews);
+        document.getElementById('newsYear').addEventListener('change', filterNews);
+
+        function filterNews() {
+            const category = document.getElementById('newsCategory').value;
+            const year = document.getElementById('newsYear').value;
+
+            document.querySelectorAll('.news-item').forEach(item => {
+                const itemCategory = item.getAttribute('data-category');
+                const itemYear = item.getAttribute('data-year');
+
+                const showCategory = category === 'all' || itemCategory === category;
+                const showYear = year === 'all' || itemYear === year;
+
+                item.style.display = showCategory && showYear ? 'block' : 'none';
+            });
+        }
+    </script> -->
+
+    <script>
+        // News data array - 30 items
+        // const newsItems = [
+        //     { category: 'Academic', year: '2023', title: 'New Computer Science Program', content: 'Starting next semester...', image: 'img/pexels-markusspiske-177598.jpg' },
+        //     { category: 'Events', year: '2023', title: 'Annual Science Fair', content: 'Join our biggest exhibition...', image: 'img/amy-harrison-4ip6AOJPztQ-unsplash.jpg' },
+        //     { category: 'Research', year: '2023', title: 'AI Research Breakthrough', content: 'New discoveries in...', image: 'img/zukhra-galiullina-Q8-nR9FgnfM-unsplash.jpg' },
+        //     { category: 'Sports', year: '2023', title: 'Football Team Victory', content: 'Championship win...', image: 'img/krystof-zajicek-Tgjc6QBX94M-unsplash.jpg' },
+        //     { category: 'Alumni', year: '2023', title: 'Alumni Reunion Event', content: 'Annual gathering...', image: 'img/edzip-education-g-3C9KdGRP8-unsplash.jpg' },
+        //     { category: 'Campus', year: '2023', title: 'New Library Opening', content: 'State-of-the-art facility...', image: 'img/pexels-olgalioncat-7244563.jpg' },
+        // Add 24 more items following the same pattern...
+        // ];
+
+        // Initialize news container
+        // const newsContainer = document.getElementById('newsContainer');
+        // let visibleItems = 6;
+
+        // Generate news items
+        //     newsItems.forEach((item, index) => {
+        //         const newsItem = document.createElement('div');
+        //         newsItem.className = 'col-md-4 news-item';
+        //         newsItem.style.display = index < 6 ? 'block' : 'none';
+        //         newsItem.setAttribute('data-category', item.category);
+        //         newsItem.setAttribute('data-year', item.year);
+        //         newsItem.innerHTML = `
+        //     <div class="card h-100">
+        //         <div class="card-img-top position-relative">
+        //             <img src="${item.image}" class="card-img-top" alt="${item.title}">
+        //             <span class="badge bg-primary position-absolute top-0 end-0 m-2">${item.category}</span>
+        //         </div>
+        //         <div class="card-body">
+        //             <small class="text-muted">${item.year}</small>
+        //             <h5 class="card-title mt-1">${item.title}</h5>
+        //             <p class="card-text">${item.content}</p>
+        //             <a href="#" class="btn btn-sm btn-outline-primary">Read More</a>
+        //         </div>
+        //     </div>
+        // `;
+        //         newsContainer.appendChild(newsItem);
+        //     });
+
+
+        // News data array - 30 items
+        const newsItems = [
+            {
+                category: 'Academic',
+                year: '2023',
+                title: 'New Computer Science Program',
+                content: 'Starting next semester, we\'ll offer cutting-edge courses in AI and machine learning...',
+                image: 'img/pexels-markusspiske-177598.jpg',
+                date: 'October 15, 2023'
+            },
+            {
+                category: 'Events',
+                year: '2023',
+                title: 'Annual Science Fair',
+                content: 'Join our biggest exhibition of student projects and research initiatives...',
+                image: 'img/amy-harrison-4ip6AOJPztQ-unsplash.jpg',
+                date: 'November 2, 2023'
+            },
+            {
+                category: 'Research',
+                year: '2023',
+                title: 'AI Research Breakthrough',
+                content: 'New discoveries in...',
+                image: 'img/zukhra-galiullina-Q8-nR9FgnfM-unsplash.jpg',
+                date: 'May 10, 2023'
+
+            },
+            {
+                category: 'Sports',
+                year: '2023',
+                title: 'Football Team Victory',
+                content: 'Championship win...',
+                image: 'img/krystof-zajicek-Tgjc6QBX94M-unsplash.jpg',
+                date: 'July 18, 2023'
+
+            },
+            {
+                category: 'Alumni',
+                year: '2023',
+                title: 'Alumni Reunion Event',
+                content: 'Annual gathering...',
+                image: 'img/edzip-education-g-3C9KdGRP8-unsplash.jpg',
+                date: 'September 5, 2023'
+
+            },
+            {
+                category: 'Campus',
+                year: '2023',
+                title: 'New Library Opening',
+                content: 'State-of-the-art facility...',
+                image: 'img/pexels-olgalioncat-7244563.jpg',
+                date: 'November 12, 2023'
+
+            },
+            // 20 New Items
+            {
+                category: 'Academic',
+                year: '2024',
+                title: 'Mathematics Department Accreditation',
+                content: 'Received international recognition for...',
+                image: 'img/math-class.jpg',
+                date: 'February 8, 2024'
+            },
+            {
+                category: 'Events',
+                year: '2022',
+                title: 'Cultural Diversity Festival',
+                content: 'Celebrating 50+ nationalities on campus...',
+                image: 'img/cultural-festival.jpg',
+                date: 'April 15, 2022'
+            },
+            // Continue adding 18 more items...
+            {
+                category: 'Research',
+                year: '2024',
+                title: 'Renewable Energy Grant Awarded',
+                content: '$2M funding for sustainable energy research...',
+                image: 'img/solar-panels.jpg',
+                date: 'June 5, 2024'
+            },
+            {
+                category: 'Sports',
+                year: '2025',
+                title: 'New Sports Complex Groundbreaking',
+                content: 'Construction begins on Olympic-sized pool...',
+                image: 'img/construction-site.jpg',
+                date: 'August 20, 2025'
+            },
+            {
+                category: 'Alumni',
+                year: '2021',
+                title: 'Alumni Entrepreneurship Summit',
+                content: 'Successful founders share their experiences...',
+                image: 'img/business-meeting.jpg',
+                date: 'October 10, 2021'
+            },
+            {
+                category: 'Campus',
+                year: '2020',
+                title: 'Campus Sustainability Initiative',
+                content: 'New recycling program launched...',
+                image: 'img/recycling-bins.jpg',
+                date: 'March 3, 2020'
+            },
+            {
+                category: 'Academic',
+                year: '2019',
+                title: 'History Department Expansion',
+                content: 'New ancient civilizations track added...',
+                image: 'img/history-books.jpg',
+                date: 'September 18, 2019'
+            },
+            {
+                category: 'Events',
+                year: '2024',
+                title: 'International Student Conference',
+                content: '500+ participants from 30 countries...',
+                image: 'img/student-conference.jpg',
+                date: 'July 11, 2024'
+            },
+            {
+                category: 'Research',
+                year: '2022',
+                title: 'Cancer Treatment Breakthrough',
+                content: 'Medical research team makes significant...',
+                image: 'img/lab-research.jpg',
+                date: 'November 30, 2022'
+            },
+            {
+                category: 'Sports',
+                year: '2023',
+                title: 'Basketball Tournament Champions',
+                content: 'Women\'s team wins regional finals...',
+                image: 'img/basketball-game.jpg',
+                date: 'December 2, 2023'
+            },
+            {
+                category: 'Alumni',
+                year: '2025',
+                title: 'Alumni Mentorship Program Launch',
+                content: 'Connect with industry professionals...',
+                image: 'img/mentorship.jpg',
+                date: 'January 15, 2025'
+            },
+            {
+                category: 'Campus',
+                year: '2024',
+                title: 'Smart Campus Initiative',
+                content: 'IoT implementation across campus...',
+                image: 'img/smart-campus.jpg',
+                date: 'May 20, 2024'
+            },
+            {
+                category: 'Academic',
+                year: '2022',
+                title: 'New Philosophy Course Series',
+                content: 'Exploring modern ethical dilemmas...',
+                image: 'img/philosophy-class.jpg',
+                date: 'October 5, 2022'
+            },
+            {
+                category: 'Events',
+                year: '2020',
+                title: 'Virtual Career Fair',
+                content: 'First online career event during pandemic...',
+                image: 'img/virtual-fair.jpg',
+                date: 'June 18, 2020'
+            },
+            {
+                category: 'Research',
+                year: '2021',
+                title: 'Climate Change Study Published',
+                content: 'Groundbreaking research on coastal erosion...',
+                image: 'img/climate-research.jpg',
+                date: 'April 22, 2021'
+            },
+            {
+                category: 'Sports',
+                year: '2019',
+                title: 'New Athletic Director Appointed',
+                content: 'Olympic medalist joins university staff...',
+                image: 'img/athletic-director.jpg',
+                date: 'August 1, 2019'
+            },
+            {
+                category: 'Alumni',
+                year: '2023',
+                title: 'Alumni Startup Demo Day',
+                content: 'Showcasing 20 new ventures...',
+                image: 'img/startup-demo.jpg',
+                date: 'February 28, 2023'
+            },
+            {
+                category: 'Campus',
+                year: '2025',
+                title: 'Student Union Renovation Complete',
+                content: 'Modern facilities now open...',
+                image: 'img/student-union.jpg',
+                date: 'September 1, 2025'
+            },
+            {
+                category: 'Academic',
+                year: '2024',
+                title: 'Space Studies Program Launch',
+                content: 'Collaboration with NASA announced...',
+                image: 'img/space-study.jpg',
+                date: 'March 15, 2024'
+            },
+            {
+                category: 'Events',
+                year: '2021',
+                title: '75th Anniversary Celebration',
+                content: 'Year-long series of special events...',
+                image: 'img/anniversary.jpg',
+                date: 'January 10, 2021'
+            },
+            {
+                category: 'Research',
+                year: '2020',
+                title: 'Neuroscience Lab Upgrade',
+                content: 'New fMRI machine installed...',
+                image: 'img/neuroscience-lab.jpg',
+                date: 'July 7, 2020'
+            },
+            {
+                category: 'Sports',
+                year: '2022',
+                title: 'Esports Arena Opening',
+                content: 'State-of-the-art gaming facility...',
+                image: 'img/esports.jpg',
+                date: 'November 15, 2022'
+            }
+            // Add remaining items...
+        ];
+
+        // Generate news items
+        newsItems.forEach((item, index) => {
+            const newsItem = document.createElement('div');
+            newsItem.className = 'col-md-4 news-item';
+            newsItem.style.display = index < 6 ? 'block' : 'none';
+            newsItem.setAttribute('data-category', item.category.toLowerCase());
+            newsItem.setAttribute('data-year', item.year);
+
+            newsItem.innerHTML = `
+        <div class="news-image-container">
+            <img src="${item.image}" class="news-image" alt="${item.title}" loading="lazy">
+            <span class="badge bg-primary position-absolute top-0 end-0 m-2">${item.category}</span>
+            <span class="badge bg-primary">${item.category}</span>
+            <div class="title-overlay">
+                <h3 class="mb-0">${item.title}</h3>
+                <small>${item.date}</small>
+            </div>
+            <div class="hover-content">
+                <h3>${item.title}</h3>
+                <p class="mt-2">${item.content}</p>
+                <div class="mt-auto">
+                    <a href="#" class="btn btn-outline-light">Read More</a>
+                </div>
+            </div>
+        </div>
+    `;
+            newsContainer.appendChild(newsItem);
+        });
+
+        // Load More functionality
+        document.getElementById('loadMore').addEventListener('click', () => {
+            const hiddenItems = Array.from(document.querySelectorAll('.news-item'))
+                .filter(item => item.style.display === 'none');
+
+            const itemsToShow = hiddenItems.slice(0, 6);
+            itemsToShow.forEach(item => item.style.display = 'block');
+
+            if (hiddenItems.length <= 6) {
+                document.getElementById('loadMore').style.display = 'none';
+            }
+        });
+
+        // Filter functionality
+        function filterNews() {
+            const category = document.getElementById('newsCategory').value;
+            const year = document.getElementById('newsYear').value;
+
+            document.querySelectorAll('.news-item').forEach(item => {
+                const itemCategory = item.getAttribute('data-category');
+                const itemYear = item.getAttribute('data-year');
+
+                const matchCategory = category === 'all' || itemCategory === category;
+                const matchYear = year === 'all' || itemYear === year;
+
+                item.style.display = (matchCategory && matchYear) ? 'block' : 'none';
+            });
+
+            // Reset load more button
+            document.getElementById('loadMore').style.display = 'block';
+            visibleItems = 6;
+        }
+
+        // Event listeners for filters
+        document.getElementById('newsCategory').addEventListener('change', filterNews);
+        document.getElementById('newsYear').addEventListener('change', filterNews);
+
+        // Calendar Events (20 items)
+        document.addEventListener('DOMContentLoaded', function () {
+            const calendarEl = document.getElementById('calendar');
+            const calendar = new FullCalendar.Calendar(calendarEl, {
+                initialView: 'dayGridMonth',
+                headerToolbar: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'dayGridMonth,dayGridWeek,listMonth'
+                },
+                events: [
+                    {
+                        title: 'Open House Day',
+                        start: '2023-11-15',
+                        url: '#'
+                    },
+                    {
+                        title: 'STEM Career Fair',
+                        start: '2023-11-20',
+                        color: '#198754'
+                    },
+                    // Add 18 more events following the pattern
+                    // Example entries:
+                    {
+                        title: 'Alumni Reunion',
+                        start: '2023-12-05',
+                        color: '#6f42c1'
+                    },
+                    {
+                        title: 'Winter Concert',
+                        start: '2023-12-15',
+                        color: '#fd7e14'
+                    },
+                    // Continue adding events through 2024-2025
+                    {
+                        title: 'Spring Semester Begins',
+                        start: '2024-01-08',
+                        color: '#0dcaf0'
+                    }
+                ],
+                eventDidMount: function (info) {
+                    info.el.querySelector('.fc-event-title').style.whiteSpace = 'normal';
+                }
+            });
+            calendar.render();
+        });
+
+        // Additional Functionality
+
+        // // Scroll to Top
+        // const scrollTopButton = document.getElementById('scrollTop');
+        // window.addEventListener('scroll', () => {
+        //     scrollTopButton.style.display = window.scrollY > 300 ? 'block' : 'none';
+        // });
+
+        // scrollTopButton.addEventListener('click', () => {
+        //     window.scrollTo({ top: 0, behavior: 'smooth' });
+        // });
+
+        // Enhanced Scroll to Top Functionality
+        const scrollButton = document.querySelector('.btn-back-top');
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                scrollButton.classList.add('show');
+            } else {
+                scrollButton.classList.remove('show');
+            }
+        });
+
+        scrollButton.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Initialize Tooltips
+        const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+        [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl));
+
+        // Animate Elements on Scroll
+        const animateOnScroll = () => {
+            const elements = document.querySelectorAll('.animate-on-scroll');
+
+            elements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const elementBottom = element.getBoundingClientRect().bottom;
+
+                if (elementTop < window.innerHeight && elementBottom > 0) {
+                    element.classList.add('animated');
+                }
+            });
+        };
+
+        window.addEventListener('scroll', animateOnScroll);
+        animateOnScroll(); // Initial check
+
+        // Archive Search
+        document.querySelector('.archive-search input').addEventListener('input', function (e) {
+            const searchTerm = e.target.value.toLowerCase();
+            document.querySelectorAll('.archive-list li').forEach(item => {
+                const text = item.textContent.toLowerCase();
+                item.style.display = text.includes(searchTerm) ? 'block' : 'none';
+            });
+        });
+
+        // Image Lazy Loading
+        document.querySelectorAll('.news-item img').forEach(img => {
+            img.loading = 'lazy';
+            img.decoding = 'async';
+        });
+
+        // Social Sharing
+        function shareArticle(title, url) {
+            const shareUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(title)}&url=${encodeURIComponent(url)}`;
+            window.open(shareUrl, '_blank', 'width=600,height=400');
+        }
+    </script>
+</body>
+
+</html>
